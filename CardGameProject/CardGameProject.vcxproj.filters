@@ -13,10 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Cards">
+      <UniqueIdentifier>{d9164363-e262-4ffe-ad67-15b54027af10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Quartz.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Hematite.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Obsidian.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Malachite.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Turquoise.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Ruby.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Amethyst.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Emeraldcpp.cpp">
+      <Filter>Resource Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Chain.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

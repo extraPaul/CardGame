@@ -1,0 +1,21 @@
+#include "Card.h"
+
+class Turquoise : public Card {
+
+public:
+
+	int getCardsPerCoin(int coins) {
+		if (0 < coins < 4)
+			return 2 * coins;
+		else if (coins == 4)
+			return 7;
+	}
+
+	string getName() {
+		return "Turquoise";
+	}
+
+	void print(const ostream& out) {
+		// ???
+	}
+};
