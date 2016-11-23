@@ -1,5 +1,2 @@
-#include "Card.h"
+#include "Chain.h"
 
-class Chain : public std::vector<Card> {
-
-};

@@ -147,7 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Amethyst.cpp" />
+    <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="Chain.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Emeraldcpp.cpp" />
     <ClCompile Include="Hematite.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -159,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="Chain.h" />
+    <ClInclude Include="Deck.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
