@@ -58,13 +58,13 @@ void Player:: buyThirdChain() {
 
 void Player::printHand(ostream&, bool) {
 
-
+																					//implementer
 
 }//prints the top card of the player's hand (with
-								//argument false) or all of the player's hand (with 								//argument true) to the supplied ostream.
+								//argument false) or all of the player's hand (with 
+								//argument true) to the supplied ostream.
 
 Player:: Player(const istream&, CardFactory*) {
-
-
+																					//implementer
 
 }//constructor that accepts an istream and reconstruct the Player from file
