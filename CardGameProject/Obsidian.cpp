@@ -3,6 +3,7 @@
 class Obsidian : public Card {
 
 public:
+	const int NUMCARDS = 16;
 
 	int getCardsPerCoin(int coins) {
 		if (0 < coins < 4)

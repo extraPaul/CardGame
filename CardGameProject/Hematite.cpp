@@ -3,6 +3,7 @@
 class Hematite : public Card {
 
 public:
+	const int NUMCARDS = 18;
 
 	int getCardsPerCoin(int coins) {
 		switch (coins) {

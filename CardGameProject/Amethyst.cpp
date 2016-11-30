@@ -3,6 +3,7 @@
 class Amethyst : public Card {
 
 public:
+	const static int NUMCARDS = 8;	//Possiblement inutile
 
 	int getCardsPerCoin(int coins) {
 		if (0 < coins < 5)

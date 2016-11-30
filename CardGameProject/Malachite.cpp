@@ -3,6 +3,7 @@
 class Malachite : public Card {
 
 public:
+	const int NUMCARDS = 14;
 
 	int getCardsPerCoin(int coins) {
 		if (1 < coins < 5)

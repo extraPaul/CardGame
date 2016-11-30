@@ -3,6 +3,7 @@
 class Turquoise : public Card {
 
 public:
+	const int NUMCARDS = 12;
 
 	int getCardsPerCoin(int coins) {
 		if (0 < coins < 4)

@@ -3,6 +3,7 @@
 class Quartz : public Card {
 
 public:
+	const int NUMCARDS = 20;
 
 	int getCardsPerCoin(int coins) {
 		if (0 < coins < 5)
