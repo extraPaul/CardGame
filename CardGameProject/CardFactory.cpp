@@ -60,5 +60,9 @@ CardFactory * CardFactory::getFactory()
 
 Deck CardFactory::getDeck()
 {
+	// obtain a time-based seed -- source: cplusplus.com/reference/algorithm/shuffle/
+	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+	shuffle(deck.begin(), deck.end(), default_random_engine(seed));
+
 	return deck;
 }
