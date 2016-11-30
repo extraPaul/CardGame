@@ -2,6 +2,7 @@
 #include <iostream>
 #include "CardFactory.h"
 #include <exception>
+#include "Chain.h"
 
 using namespace std;
 
@@ -21,8 +22,13 @@ public:
 	Chain& operator[](int i);		// returns the chain at position i.
 	void buyThirdChain();			//adds an empty third chain to the player for two coins
 	void printHand(ostream&, bool); //prints the top card of the player's hand (with
-									//argument false) or all of the player's hand (with 									//argument true) to the supplied ostream.
-	Player(const istream&, CardFactory*); //constructor that accepts an istream and reconstruct the Player from file};class NotEnoughCoins : public exception
+									//argument false) or all of the player's hand (with 
+									//argument true) to the supplied ostream.
+	Player(const istream&, CardFactory*); //constructor that accepts an istream and reconstruct the Player from file
+};
+
+
+class NotEnoughCoins : public exception
 {
 	virtual const char* what() const throw()
 	{
