@@ -12,9 +12,9 @@ Card * Deck::draw()
 		return nullptr;
 	}
 	else {
-		// lvalue is a value that still exist outside of here
-		//temp = new Card;
-		//return (*this).pop_back());
+		Card* temp = &(*this).back();
+		(*this).pop_back();
+		return temp;
 	}
 }
 
