@@ -150,6 +150,7 @@
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="Chain.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Emerald.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="Hematite.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quartz.cpp" />
     <ClCompile Include="Ruby.cpp" />
+    <ClCompile Include="TradeArea.cpp" />
     <ClCompile Include="Turquoise.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,8 +168,10 @@
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TradeArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

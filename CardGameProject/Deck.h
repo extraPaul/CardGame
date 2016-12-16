@@ -1,4 +1,3 @@
-#pragma once
 #include "Card.h"
 #include <vector>
 

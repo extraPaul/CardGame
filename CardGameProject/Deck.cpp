@@ -8,7 +8,7 @@ Deck::Deck(const istream &stream, CardFactory *cf)
 Card * Deck::draw()
 {
 	if (this->empty()) {
-		//Erreur?
+		throw domain_error("The deck is empty");
 		return nullptr;
 	}
 	else {
