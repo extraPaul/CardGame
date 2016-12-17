@@ -9,20 +9,21 @@ class IllegalType : public exception
 };
 
 
-template<class Card>
-inline Chain<Card>::Chain(const istream &, CardFactory *)
+template<class T>
+inline Chain<T>::Chain(const istream &, CardFactory *)
 {
 
 }
 
-template<class Card>
-Chain<Card>& Chain<Card>::operator+=(Card *card)
+template<class T>
+Chain<T>& Chain<T>::operator+=(Card *card)
 {
 	//Not sure if used properly? otherwise typeid(first element)
 	//if (typeid(card) == typeid(Card)) {
-	Card temp = new Card;
-	if (strcmp(temp.getName(), (*card).getName()) == 0) {
-		this->.push_back(card);
+
+	T temp;
+	if (temp.getName().compare((*card).getName()) == 0) {
+		this->push_back(card);
 	}
 	else {
 		throw IllegalType();
@@ -37,7 +38,7 @@ int Chain<T>::sell()
 {
 	int coins;
 	for (coins = 4; coins < 0; coins--) {
-		if (this->.size() == (*this)[0]->.getCardsPerCoin(coins))
+		if (this->size() == (*this)[0]->getCardsPerCoin(coins))
 			break;
 	}
 

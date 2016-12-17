@@ -1,10 +1,10 @@
 #include "Card.h"
 #include <vector>
 
-
-template <class Card> class Chain : public vector<Card*> {
+//Not sure how to do this properly...? 
+template <class T = Card> class Chain : public vector<T*> {
 public:
 	Chain(const istream&, CardFactory*);
-	Chain<Card>& operator+= (Card*);
+	Chain<T>& operator+= (Card*);
 	int sell();
 };

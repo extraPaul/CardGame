@@ -10,7 +10,7 @@ class Player {
 	string name;
 	int numCoins;
 	int maxNumChains;
-	Chain* chain;
+	Chain<>* chain;
 
 public:
 	Player(std::string&);			// constructor that creates a Player with a given name.
@@ -19,7 +19,7 @@ public:
 	Player& operator+=(int);		// add a number of coins
 	int getMaxNumChains();			// returns either 2 or 3.
 	int getNumChains();				// returns the number of non - zero chains
-	Chain& operator[](int i);		// returns the chain at position i.
+	Chain<>& operator[](int i);		// returns the chain at position i.
 	void buyThirdChain();			//adds an empty third chain to the player for two coins
 	void printHand(ostream&, bool); //prints the top card of the player's hand (with
 									//argument false) or all of the player's hand (with 

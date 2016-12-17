@@ -39,7 +39,7 @@ int Player::getNumChains() {
 }
 
 
- Chain& Player:: operator[](int i) {															//implementer?
+ Chain<>& Player:: operator[](int i) {															//implementer?
 	 return chain[i];
 }
 

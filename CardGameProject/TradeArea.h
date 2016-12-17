@@ -1,5 +1,6 @@
 #include "Card.h"
 #include <vector>
+#include <list>
 
 class TradeArea {
 public:
@@ -9,4 +10,7 @@ public:
 	int numCards();
 	void print(ostream&);		//insert to ostream?
 	TradeArea(istream&, const CardFactory*);
+private:
+	list<Card*> cards;
+	list<string> cardTypes;
 };

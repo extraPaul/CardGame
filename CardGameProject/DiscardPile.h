@@ -1,6 +1,7 @@
 #include "Card.h"
 #include <vector>
 
+//should maybe be private?
 class DiscardPile : public vector<Card*> {
 public:
 	DiscardPile& operator+= (Card*);
