@@ -16,7 +16,7 @@ public:
 		return "Ruby";
 	}
 
-	void print(const ostream& out) {
-		// ???
+	void print(ostream& out) {
+		out << "R";
 	}
 };

@@ -16,7 +16,7 @@ public:
 		return "Obsidian";
 	}
 
-	void print(const ostream& out) {
-		// ???
+	void print(ostream& out) {
+		out << "O";
 	}
 };

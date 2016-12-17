@@ -26,14 +26,19 @@ Card * DiscardPile::top()
 	return this->back();
 }
 
-void DiscardPile::print(ostream &)
+void DiscardPile::print(ostream & out)
 {
-}
-
-void DiscardPile::printTop(ostream &)
-{
+	for (vector<Card*>::iterator it = this->begin(); it != this->end(); it++) {
+		(*it)->print(out);
+	}
 }
 
 DiscardPile::DiscardPile(istream &, const CardFactory *)
 {
+}
+
+ostream & operator<<(ostream & out, DiscardPile dp)
+{
+	dp.back()->print(out);
+	return out;
 }

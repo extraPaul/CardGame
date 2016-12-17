@@ -160,6 +160,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quartz.cpp" />
     <ClCompile Include="Ruby.cpp" />
+    <ClCompile Include="Table.cpp" />
     <ClCompile Include="TradeArea.cpp" />
     <ClCompile Include="Turquoise.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

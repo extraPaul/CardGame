@@ -16,7 +16,7 @@ public:
 		return "Malachite";
 	}
 
-	void print(const ostream& out) {
-		// ???
+	void print(ostream& out) {
+		out << "M";
 	}
 };

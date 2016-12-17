@@ -39,10 +39,14 @@ int TradeArea::numCards()
 	return cards.size();
 }
 
-void TradeArea::print(ostream &)
+TradeArea::TradeArea(istream &, const CardFactory *)
 {
 }
 
-TradeArea::TradeArea(istream &, const CardFactory *)
+ostream & operator<<(ostream & out, TradeArea ta)
 {
+	for (list<Card*>::iterator it = ta.cards.begin(); it != ta.cards.end(); it++) {
+		(*it)->print(out);
+	}
+	return out;
 }

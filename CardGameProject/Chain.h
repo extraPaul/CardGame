@@ -7,4 +7,5 @@ public:
 	Chain(const istream&, CardFactory*);
 	Chain<T>& operator+= (Card*);
 	int sell();
+	friend ostream & operator << (ostream &, Chain);
 };

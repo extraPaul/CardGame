@@ -12,7 +12,7 @@ Card * Deck::draw()
 		return nullptr;
 	}
 	else {
-		Card* temp = &(*this).back();
+		Card* temp = (*this).back();
 		(*this).pop_back();
 		return temp;
 	}
@@ -21,4 +21,12 @@ Card * Deck::draw()
 Deck::Deck()
 {
 	//do nothing
+}
+
+ostream & operator<<(ostream & out, Deck d)
+{
+	for (vector<Card*>::iterator it = d.begin(); it != d.end(); it++) {
+		(*it)->print(out);
+	}
+	return out;
 }

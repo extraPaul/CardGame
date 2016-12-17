@@ -31,8 +31,19 @@ Card* Hand ::operator[](int position) {
 
 
 
- //Ajouter également un opérateur d'insertion pour Hand dans un std::ostream. La main doit afficher
- //toutes les cartes dans l'ordre.
+
 
 
 Hand:: Hand(const istream&, CardFactory*) {}													//implementer
+
+
+ //Ajouter également un opérateur d'insertion pour Hand dans un std::ostream. La main doit afficher
+ //toutes les cartes dans l'ordre.
+ostream & operator<<(ostream & out, Hand h)
+{
+	// TODO: make sure cards are in order
+	for (vector<Card>::iterator it = h.begin(); it != h.end(); it++) {
+		(*it).print(out);
+	}
+	return out;
+}

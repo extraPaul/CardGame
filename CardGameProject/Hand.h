@@ -11,6 +11,7 @@ public:
 	Card* top();							//renvoie mais ne supprime pas la première carte de la main du joueur.
 	Card* operator[](int);					//renvoie et supprime une carte à une position donnée.
 	Hand(const istream&, CardFactory*);		//constructeur qui accepte fichier
+	friend ostream & operator << (ostream &, Hand);
 };
 
 

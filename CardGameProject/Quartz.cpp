@@ -14,7 +14,7 @@ public:
 		return "Quartz";
 	}
 
-	void print(const ostream& out) {
-		// ???
+	void print(ostream& out) {
+		out << "Q";
 	}
 };

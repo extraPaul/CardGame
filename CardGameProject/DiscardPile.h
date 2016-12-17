@@ -8,6 +8,6 @@ public:
 	Card* pickUp();
 	Card* top();
 	void print(ostream&);
-	void printTop(ostream&);
+	friend ostream & operator << (ostream &, DiscardPile);
 	DiscardPile(istream&, const CardFactory*);
 };

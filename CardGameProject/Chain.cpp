@@ -42,8 +42,16 @@ int Chain<T>::sell()
 			break;
 	}
 
-	//TODO: Print to ostream?
-
 	return coins;
 }
 
+template<class T>
+ostream & operator<<(ostream & sortie, Chain<T> c)
+{
+	sortie << c[0]->getName() << '\t';
+	for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
+		sortie << " ";
+		(*it)->print(sortie);
+	}
+	return sortie;
+}

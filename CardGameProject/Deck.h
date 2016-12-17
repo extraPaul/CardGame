@@ -2,9 +2,10 @@
 #include <vector>
 
 
-class Deck : public vector<Card> {
+class Deck : public vector<Card*> {
 public:
 	Deck(const istream&, CardFactory*);
 	Deck();
 	Card* draw();
+	friend ostream & operator << (ostream &, Deck);
 };

@@ -68,3 +68,12 @@ Player:: Player(const istream&, CardFactory*) {
 																					//implementer
 
 }//constructor that accepts an istream and reconstruct the Player from file
+
+ostream & operator<<(ostream & out, Player p)
+{
+	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
+	for (int i = 0; i < p.getNumChains; i++)
+		out << p[i] << '\n';
+
+	return out;
+}

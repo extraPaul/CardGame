@@ -8,7 +8,7 @@ public:
 	bool legal(Card*);
 	Card* trade(string);
 	int numCards();
-	void print(ostream&);		//insert to ostream?
+	friend ostream & operator << (ostream &, TradeArea);
 	TradeArea(istream&, const CardFactory*);
 private:
 	list<Card*> cards;

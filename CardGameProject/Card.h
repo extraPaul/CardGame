@@ -9,5 +9,5 @@ class Card {
 public:
 	virtual int getCardsPerCoin(int) = 0;
 	virtual string getName() = 0;
-	virtual void print(const ostream&) = 0;
+	virtual void print(ostream&) = 0;
 };

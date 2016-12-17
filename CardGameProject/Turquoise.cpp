@@ -16,7 +16,7 @@ public:
 		return "Turquoise";
 	}
 
-	void print(const ostream& out) {
-		// ???
+	void print(ostream& out) {
+		out << "T";
 	}
 };
