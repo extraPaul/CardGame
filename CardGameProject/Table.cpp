@@ -6,6 +6,8 @@ Table::Table(string & name1, string & name2)
 	Player player2(name2);
 	players.push_back(player1);
 	players.push_back(player2);
+	discard = new DiscardPile();
+	ta= new TradeArea();
 }
 
 Table::~Table()
