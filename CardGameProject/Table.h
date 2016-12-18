@@ -18,4 +18,7 @@ public:
 	void printHand(bool);
 	friend ostream & operator << (ostream &, Table);
 	Table(istream&, CardFactory*);
+
+
+	void print(void);		//for testing purpose
 };

@@ -32,6 +32,7 @@ public:
 	template<class T> bool addChain();		//return false if the chain can't be added.
 	bool addToChain(Card*);
 	void sellChain(int i);
+	Hand getHand() { return hand; }
 
 private:
 	void addChain(char);
@@ -49,4 +50,16 @@ class NotEnoughCoins : public exception
 		out << e.what();
 		return out;
 	}
+
+};
+
+class ChainDoesntExist : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Chain index is out of bounds";
+	}
+
+	
+	
 };

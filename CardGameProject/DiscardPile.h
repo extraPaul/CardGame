@@ -12,4 +12,5 @@ public:
 	void print(ostream&);
 	friend ostream & operator << (ostream &, DiscardPile);
 	DiscardPile(istream&, CardFactory*);
+	bool isEmpty();
 };

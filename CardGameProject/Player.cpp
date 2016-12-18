@@ -36,8 +36,11 @@ int Player::getNumChains() {
 }
 
 
- Chain<Card> & Player:: operator[](int i) {												//implementer?
-	 return chains[i];
+ Chain<Card> & Player:: operator[](int i) {	
+	 if (i < getNumChains())
+		 return chains[i];
+	 else
+		 throw ChainDoesntExist();
 }
 
 //On assume qu'un joueur a seulement besoins d'acheter une troisième chaine 1 fois.
@@ -46,15 +49,21 @@ void Player:: buyThirdChain() {
 		throw NotEnoughCoins();
 	else {
 		numCoins = numCoins - 3;
-													//la troisieme chaine est elle dans le bon ordre
+																//la troisieme chaine est elle dans le bon ordre
 		maxNumChains++;
 	}
 
 }
 
-void Player::printHand(ostream&, bool) {
+void Player::printHand(ostream& out, bool notTopCard) {
+	if (notTopCard) {
+		out << hand;
+	}
+	else {
 
-																					//implementer
+		out << hand.top();
+	}
+																					
 
 }//prints the top card of the player's hand (with
 								//argument false) or all of the player's hand (with 
@@ -153,7 +162,7 @@ ostream & operator<<(ostream & out, Player p)
 {
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains(); i++)
-		out << p[i] << '\n';
+	//	out << p[i] << '\n';
 	out << '\t';
 	return out;
 }
