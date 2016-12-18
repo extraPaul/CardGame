@@ -31,6 +31,7 @@ public:
 	friend ostream & operator << (ostream &, Player);
 	template<class T> bool addChain();		//return false if the chain can't be added.
 	bool addToChain(Card*);
+	void sellChain(int i);
 
 private:
 	void addChain(char);
@@ -51,4 +52,10 @@ class ChainDoesntExist : public exception
 	{
 		return "Chain index is out of bounds";
 	}
+
+	friend ostream & operator << (ostream & out, NotEnoughCoins e) {
+		out << e.what();
+		return out;
+	}
+	
 };
