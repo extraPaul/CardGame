@@ -52,7 +52,7 @@ ostream & operator<<(ostream & out, Hand h)
 {
 	// TODO: make sure cards are in order
 	for (vector<Card*>::iterator it = h.begin(); it != h.end(); it++) {
-		(**it).print(out);
+		out << (**it);
 	}
 	return out;
 }

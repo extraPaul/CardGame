@@ -104,7 +104,7 @@ Line 1: Char for each card
 ostream & operator<<(ostream & out, TradeArea ta)
 {
 	for (list<Card*>::iterator it = ta.cards.begin(); it != ta.cards.end(); it++) {
-		(*it)->print(out);
+		out << (**it);
 	}
 	return out;
 }

@@ -1,5 +1,45 @@
 #include "Table.h"
 
+
+static void BuyOrSellChain(Player player) {
+	bool askExchange = true;
+	char answer;
+	if (player.getMaxNumChains() < 3) {
+		cout << "Voulez-vous acheter une nouvelle chaine? (y/n) ";
+		cin >> answer;
+		if (answer == 'y') {
+			try {
+				player.buyThirdChain();
+				//The following is skipped if exception is thrown.
+				askExchange = false;
+			}
+			catch (NotEnoughCoins e) {
+				cout << e << "\n";
+			}
+		}
+	}
+	if (askExchange) {
+		cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
+		cin >> answer;
+		if (answer == 'y') {
+			int choix = 0;
+			while (!choix) {
+				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
+				cin >> choix;
+				if (!(0 < choix && choix <= player.getNumChains())) {
+					choix = 0;
+				}
+			}
+			choix--;
+			player.sellChain(choix);
+			//goes back in the loop and adds the card.
+		}
+	}
+}
+
+
+
+
 int main() {
 	//Setup
 	char answer;
@@ -59,7 +99,7 @@ int main() {
 									temp = table->ta->trade(type);
 								}
 								else {
-
+									BuyOrSellChain(player);
 								}
 							}
 						}	//else add them to discard.
@@ -72,6 +112,19 @@ int main() {
 						}
 					}	//done with Trade Area (Étape 1)
 
+					//Étape 2
+					Card* cardPlayed = player.getHand().play();
+					cout << "Vous jouez la première carte de votre main: " << cardPlayed << "\n";
+					bool keepPlaying = true;
+					while (keepPlaying) {
+						if (player.addToChain(cardPlayed)) {
+							cout << "Voulez-vous jouer";
+						}
+						else {
+							BuyOrSellChain(player);
+						}
+					}
+					
 				}
 			}
 
@@ -83,41 +136,4 @@ int main() {
 		system("pause");
 		return 0;
 	}
-}
-
-static void BuyOrSellChain(Player player) {
-	bool askExchange = true;
-	char answer;
-	if (player.getMaxNumChains() < 3) {
-		cout << "Voulez-vous acheter une nouvelle chaine? (y/n) ";
-		cin >> answer;
-		if (answer == 'y') {
-			try {
-				player.buyThirdChain();
-				//The following is skipped if exception is thrown.
-				askExchange = false;
-			}
-			catch (NotEnoughCoins e) {
-				cout << e << "\n";
-			}
-		}
-	}
-	if (askExchange) {
-		cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
-		cin >> answer;
-		if (answer == 'y') {
-			int choix = 0;
-			while (!choix) {
-				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
-				cin >> choix;
-				if (!(0 < choix && choix <= player.getNumChains())) {
-					choix = 0;
-				}
-			}
-			choix--;
-			player.sellChain(choix);
-			//goes back in the loop and adds the card.
-		}
-	}
-
 }

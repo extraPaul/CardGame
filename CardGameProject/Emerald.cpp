@@ -14,7 +14,7 @@ public:
 		return "Emerald";
 	}
 
-	void print(ostream& out) {
+	void print(ostream& out) const {
 		out << "E";
 	}
 };

@@ -51,7 +51,7 @@ void DiscardPile::print(ostream & out)				//print all cards
 {
 	if (!isEmpty()) {
 		for (vector<Card*>::iterator it = this->begin(); it != this->end(); it++) {
-			(*it)->print(out);
+			out << (**it);
 		}
 	}
 	else
@@ -78,7 +78,7 @@ DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const ada
 ostream & operator<<(ostream & out, DiscardPile dp)
 {
 	if (!dp.isEmpty()) {
-		dp.back()->print(out);
+		out << dp.back();
 	}
 	
 	return out;
