@@ -83,11 +83,12 @@ Player:: Player(istream& in, CardFactory* cf) {
 }
 /*
 template<class T>
-inline bool Player::addChain()
-{
+//typename std::enable_if<std::is_base_of<Card, T>::value>::type
+bool Player::addChain() {
+	static_assert(std::is_base_of<Card, T>::value, "T is not derived from Card");
 	if (chains.size() <= maxNumChains) {
-		Chain<T> newChain;
-		chains.push_back(newChain);
+		T temp;
+		addChain(temp.getName()[0]);
 		return true;
 	}
 	//else
@@ -98,32 +99,7 @@ inline bool Player::addChain()
 bool Player::addToChain(Card * card)
 {
 	if (chains.size() < maxNumChains) {
-		char type = card->getName()[0];
-		if (type == 'Q') {
-			addChain<Quartz>();
-		}
-		else if (type == 'H') {
-			addChain<Hematite>();
-		}
-		else if (type == 'O') {
-			addChain<Obsidian>();
-		}
-		else if (type == 'M') {
-			addChain<Malachite>();
-		}
-		else if (type == 'M') {
-			addChain<Turquoise>();
-		}
-		else if (type == 'M') {
-			addChain<Ruby>();
-		}
-		else if (type == 'A') {
-			addChain<Amethyst>();
-		}
-		else if (type == 'E') {
-			addChain<Emerald>();
-		}
-
+		addChain(card->getName()[0]);
 		chains.back() += card;
 		return true;
 	}
@@ -137,6 +113,36 @@ bool Player::addToChain(Card * card)
 	//else
 	return false;
 }*/
+
+void Player::addChain(char type)
+{
+	Chain<> newChain;
+	if (type == 'Q') {
+		Chain<Quartz> newChain;
+	}
+	else if (type == 'H') {
+		Chain<Hematite> newChain;
+	}
+	else if (type == 'O') {
+		Chain<Obsidian> newChain;
+	}
+	else if (type == 'M') {
+		Chain<Malachite> newChain;
+	}
+	else if (type == 'T') {
+		Chain<Turquoise> newChain;
+	}
+	else if (type == 'R') {
+		Chain<Ruby> newChain;
+	}
+	else if (type == 'A') {
+		Chain<Amethyst> newChain;
+	}
+	else if (type == 'E') {
+		Chain<Emerald> newChain;
+	}
+	chains.push_back(newChain);
+}
 
 
 //constructor that accepts an istream and reconstruct the Player from file

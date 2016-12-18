@@ -76,10 +76,10 @@ Card* CardFactory::getCard(char type) {
 	else if (type == 'M') {
 		newCard = new Malachite();
 	}
-	else if (type == 'M') {
+	else if (type == 'T') {
 		newCard = new Turquoise();
 	}
-	else if (type == 'M') {
+	else if (type == 'R') {
 		newCard = new Ruby();
 	}
 	else if (type == 'A') {
