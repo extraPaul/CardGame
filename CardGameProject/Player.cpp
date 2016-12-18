@@ -4,8 +4,6 @@ Player:: Player(string &playerName) {											//quoi faire avec la reference
 	name = playerName;
 	numCoins = 0;
 	maxNumChains = 2;
-	chains.push_back(Chain<Card>());					//not sure if I should add this
-	chains.push_back(Chain<Card>());
 }
 
 
@@ -33,12 +31,7 @@ int Player:: getMaxNumChains() {
 }
 
 int Player::getNumChains() {
-	int count=0;
-	for (int i = 0; i < maxNumChains; i++) {
-		if (chains[i].size !=0)
-			count++;
-	}
-	return count;
+	return chains.size();
 
 }
 
@@ -92,4 +85,10 @@ ostream & operator<<(ostream & out, Player p)
 		out << p[i] << '\n';
 
 	return out;
+}
+
+template<class T>
+inline bool Player::addChain()
+{
+	return false;
 }
