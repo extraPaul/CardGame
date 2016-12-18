@@ -31,6 +31,9 @@ public:
 	friend ostream & operator << (ostream &, Player);
 	template<class T> bool addChain();		//return false if the chain can't be added.
 	bool addToChain(Card*);
+
+private:
+	void addChain(char);
 };
 
 
