@@ -7,6 +7,7 @@ public:
 	// default constructor
 	Chain() = default;
 	Chain(const istream&, CardFactory*);
+	bool legal(Card*);						//returns true if it's legal to add the card to the chain.
 	Chain<T>& operator+= (Card*);
 	int sell();
 	friend ostream & operator << (ostream &, Chain);

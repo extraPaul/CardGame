@@ -40,14 +40,14 @@ int Player::getNumChains() {
 	 return chains[i];
 }
 
-
+//On assume qu'un joueur a seulement besoins d'acheter une troisième chaine 1 fois.
 void Player:: buyThirdChain() {
-	if (numCoins < 2)
+	if (numCoins < 3)
 		throw NotEnoughCoins();
 	else {
-		numCoins = numCoins - 2;
+		numCoins = numCoins - 3;
 													//la troisieme chaine est elle dans le bon ordre
-		chains.resize(3);
+		maxNumChains++;
 	}
 
 }
@@ -67,9 +67,66 @@ Player:: Player(istream& in, CardFactory* cf) {
 	
 	cin >> name >> numCoins;
 
-}//constructor that accepts an istream and reconstruct the Player from file
+}
+
+template<class T>
+inline bool Player::addChain()
+{
+	if (chains.size() <= maxNumChains) {
+		Chain<T> newChain;
+		chains.push_back(newChain);
+		return true;
+	}
+	//else
+	return false;
+}
 
 
+bool Player::addToChain(Card * card)
+{
+	if (chains.size() < maxNumChains) {
+		char type = card->getName()[0];
+		if (type == 'Q') {
+			addChain<Quartz>();
+		}
+		else if (type == 'H') {
+			addChain<Hematite>();
+		}
+		else if (type == 'O') {
+			addChain<Obsidian>();
+		}
+		else if (type == 'M') {
+			addChain<Malachite>();
+		}
+		else if (type == 'M') {
+			addChain<Turquoise>();
+		}
+		else if (type == 'M') {
+			addChain<Ruby>();
+		}
+		else if (type == 'A') {
+			addChain<Amethyst>();
+		}
+		else if (type == 'E') {
+			addChain<Emerald>();
+		}
+
+		chains.back() += card;
+		return true;
+	}
+	//else
+	for (int i = 0; i < chains.size(); i++) {
+		if ((*this)[i].legal(card)) {
+			(*this)[i] += card;
+			return true;
+		}
+	}
+	//else
+	return false;
+}
+
+
+//constructor that accepts an istream and reconstruct the Player from file
  /*
  Text File Format:
  Line 1: name /t nb of coins
@@ -85,10 +142,4 @@ ostream & operator<<(ostream & out, Player p)
 		out << p[i] << '\n';
 
 	return out;
-}
-
-template<class T>
-inline bool Player::addChain()
-{
-	return false;
 }
