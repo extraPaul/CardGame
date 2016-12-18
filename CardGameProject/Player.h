@@ -11,7 +11,7 @@ class Player {
 	string name;
 	int numCoins;
 	int maxNumChains;
-	Chain<>* chain;
+	vector<Chain<Card>> chains;
 	Hand hand;
 
 public:

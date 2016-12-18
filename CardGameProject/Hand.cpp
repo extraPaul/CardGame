@@ -5,10 +5,9 @@
 //back est la premiere carte 
 //size - position pour avoir la position
 
-Hand& Hand ::operator+=(Card*) {
-
-
-
+Hand& Hand ::operator+=(Card*cardToAdd) {
+	(*this).push_back(*cardToAdd);
+	return *this;
 
 }//a joute une carte derrière la dernière carte de la main.
 
@@ -30,15 +29,25 @@ Card* Hand ::operator[](int position) {
 }//renvoie et supprime une carte à une position donnée.
 
 
+Hand:: Hand(std::istream& in, CardFactory* cf) {
+	char cardType[150];
+	in.getline(cardType, 256);
+	int i = 0;
+	while (cardType[i] == NULL) {
+		Card* cardToAdd = ((*cf).getCard(cardType[i]));
+		(*this).push_back(*cardToAdd);						//check if right order
+	}
 
-
-
-
-Hand:: Hand(const istream&, CardFactory*) {}													//implementer
+}													
 
 
  //Ajouter également un opérateur d'insertion pour Hand dans un std::ostream. La main doit afficher
  //toutes les cartes dans l'ordre.
+
+ /*
+ Text File Format:
+ Line 1: Char for each card
+ */
 ostream & operator<<(ostream & out, Hand h)
 {
 	// TODO: make sure cards are in order

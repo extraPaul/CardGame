@@ -4,10 +4,9 @@ Player:: Player(string &playerName) {											//quoi faire avec la reference
 	name = playerName;
 	numCoins = 0;
 	maxNumChains = 2;
-	chain = new Chain<>[2];
-	chain[0] = NULL;
-    chain[1] = NULL;
-
+	chains.max_size = maxNumChains;
+	chains.push_back(Chain<Card>());					//not sure if I should add this
+	chains.push_back(Chain<Card>());
 }
 
 
@@ -37,7 +36,7 @@ int Player:: getMaxNumChains() {
 int Player::getNumChains() {
 	int count=0;
 	for (int i = 0; i < maxNumChains; i++) {
-		if (chain[i] != NULL)
+		if (chains[i].size !=0)
 			count++;
 	}
 	return count;
@@ -45,8 +44,8 @@ int Player::getNumChains() {
 }
 
 
- Chain<>& Player:: operator[](int i) {															//implementer?
-	 return chain[i];
+ Chain<Card> & Player:: operator[](int i) {												//implementer?
+	 return chains[i];
 }
 
 
@@ -55,9 +54,8 @@ void Player:: buyThirdChain() {
 		throw NotEnoughCoins();
 	else {
 		numCoins = numCoins - 2;
-		*(chain + 2) = new Chain;											//la troisieme chaine est elle dans le bon ordre
-
-		chain[2] = NULL;
+													//la troisieme chaine est elle dans le bon ordre
+		chains.resize(3);
 	}
 
 }
@@ -70,10 +68,20 @@ void Player::printHand(ostream&, bool) {
 								//argument false) or all of the player's hand (with 
 								//argument true) to the supplied ostream.
 
-Player:: Player(const istream&, CardFactory*) {
+
+Player:: Player(const istream& in, CardFactory* cf) {
 																					//implementer
 
 }//constructor that accepts an istream and reconstruct the Player from file
+
+
+ /*
+ Text File Format:
+ Line 1: name /t nb of coins
+ Line 2: chain 1 info  **if not null
+ Line 3: chain 2 info  **if not null
+ Line 4: chain 3 info  **if not null
+ */
 
 ostream & operator<<(ostream & out, Player p)
 {

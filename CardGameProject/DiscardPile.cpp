@@ -35,6 +35,11 @@ Card * DiscardPile::top()
 	return this->back();
 }
 
+/*
+Text File Format:
+Line 1: Char for each card in discard
+*/
+
 void DiscardPile::print(ostream & out)
 {
 	for (vector<Card*>::iterator it = this->begin(); it != this->end(); it++) {
@@ -45,6 +50,8 @@ void DiscardPile::print(ostream & out)
 DiscardPile::DiscardPile(istream &, const CardFactory *)
 {
 }
+
+
 
 ostream & operator<<(ostream & out, DiscardPile dp)
 {

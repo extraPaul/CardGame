@@ -23,8 +23,13 @@ Deck::Deck(CardFactory* cf)
 	*this = (*cf).getDeck();
 }
 
-ostream & operator<<(ostream & out, Deck d)
-{
+
+/*
+Text File Format:
+Line 1: Char for each card
+*/
+
+s{
 	for (vector<Card*>::iterator it = d.begin(); it != d.end(); it++) {
 		(*it)->print(out);
 	}

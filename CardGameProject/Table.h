@@ -8,8 +8,8 @@ class Table {
 public:
 	vector<Player> players;
 	Deck deck;
-	DiscardPile discard;
-	TradeArea ta;
+	DiscardPile *discard;
+	TradeArea *ta;
 
 public:
 	Table(string& name1, string& name2);

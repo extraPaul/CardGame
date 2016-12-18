@@ -6,6 +6,7 @@
 #include <iterator>
 #include <chrono>
 #include "Deck.h"
+#include "Card.h"
 
 class CardFactory {
 private:
@@ -16,5 +17,6 @@ private:
 public:
 	static CardFactory* getFactory();
 	Deck getDeck();
+	Card* getCard(char);
 };
 #endif

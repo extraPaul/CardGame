@@ -29,8 +29,30 @@ void Table::printHand(bool)
 
 Table::Table(istream & in, const CardFactory* cf)
 {
+	/*Player *player1 = new Player(in, cf);
+	Player *player2 = new Player(in, cf);
+
+	players.push_back(*player1);
+	players.push_back(*player1);*/
+
+	discard = new DiscardPile(in, cf);
+	ta = new TradeArea(in, cf);
+
+
+
+	//  deck = Deck(in, cf);    shouldn we have the deck somewhere?
+
 
 }
+
+
+/*
+Text File Format:
+Line 1: player 1 info
+Line 2: player 2 info
+Line 3: discard pile info
+Line 4: trading area info
+*/
 
 ostream & operator<<(ostream & out, Table t)
 {

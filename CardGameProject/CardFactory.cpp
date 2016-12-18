@@ -10,7 +10,6 @@
 
 
 CardFactory::CardFactory() {
-	deck = Deck(this);
 	Card * newCard;
 	for (int i = 0; i < 8; i++)
 	{
@@ -67,4 +66,37 @@ Deck CardFactory::getDeck()
 	shuffle(deck.begin(), deck.end(), default_random_engine(seed));
 
 	return deck;
+}
+
+
+Card* CardFactory::getCard(char type) {
+	Card * newCard = NULL;
+
+	if (type == 'Q') {
+		newCard = new Quartz();
+	}
+	else if (type == 'H') {
+		newCard = new Hematite();
+	}
+	else if (type =='O') {
+		newCard = new Obsidian();
+	}
+	else if (type == 'M') {
+		newCard = new Malachite();
+	}
+	else if (type == 'M') {
+		newCard = new Turquoise();
+	}
+	else if (type == 'M') {
+		newCard = new Ruby();
+	}
+	else if (type == 'A') {
+		newCard = new Amethyst();
+	}
+	else if (type == 'E') {
+		newCard = new Emerald();
+	}
+
+	return newCard;
+
 }

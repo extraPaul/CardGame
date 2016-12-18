@@ -45,6 +45,12 @@ int Chain<T>::sell()
 	return coins;
 }
 
+/*
+Text File Format:
+Line 1: CardType Name \t X X X			 (amount of time)
+*/
+
+
 template<class T>
 ostream & operator<<(ostream & sortie, Chain<T> c)
 {
