@@ -81,7 +81,7 @@ Player:: Player(istream& in, CardFactory* cf) {
 	}
 
 }
-
+/*
 template<class T>
 bool Player::addChain() {
 	static_assert(std::is_base_of<Card, T>::value, "T is not derived from Card");
@@ -111,11 +111,11 @@ bool Player::addToChain(Card * card)
 	}
 	//else
 	return false;
-}
+}*/
 
 void Player::sellChain(int i){
-	numCoins += (*this)[i].sell();
-
+	//numCoins += (*this)[i].sell();
+	//chains.erase(chains.begin() + i);
 }
 
 void Player::addChain(char type)
