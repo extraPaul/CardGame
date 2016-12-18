@@ -19,6 +19,7 @@ public:
 	string getName();				// get the name of the player.
 	int getNumCoins();				// get the number of coins currently held by the player.
 	Player& operator+=(int);		// add a number of coins
+	Player& operator+=(Card*);		// add a card to the player's hand
 	int getMaxNumChains();			// returns either 2 or 3.
 	int getNumChains();				// returns the number of non - zero chains
 	Chain<>& operator[](int i);		// returns the chain at position i.

@@ -24,6 +24,12 @@ Player& Player:: operator +=(int i) {
 	return(*this);
 }
 
+Player & Player::operator+=(Card *card)
+{
+	hand += card;
+	return *this;
+}
+
 int Player:: getMaxNumChains() {
 	return maxNumChains;
 }
