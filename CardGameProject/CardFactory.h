@@ -1,9 +1,11 @@
-#include "Deck.h"
+#ifndef CardFactory_h
+#define CardFactory_h
+
 #include <random>
 #include <algorithm>
 #include <iterator>
 #include <chrono>
-
+#include "Deck.h"
 
 class CardFactory {
 private:
@@ -15,3 +17,4 @@ public:
 	static CardFactory* getFactory();
 	Deck getDeck();
 };
+#endif

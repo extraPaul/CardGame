@@ -8,6 +8,7 @@ public:
 	~TradeArea();
 	TradeArea& operator += (Card*);
 	bool legal(Card*);
+	bool empty();
 	Card* trade(string);
 	int numCards();
 	friend ostream & operator << (ostream &, TradeArea);

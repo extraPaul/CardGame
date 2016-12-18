@@ -4,9 +4,9 @@ Player:: Player(string &playerName) {											//quoi faire avec la reference
 	name = playerName;
 	numCoins = 0;
 	maxNumChains = 2;
-	chain = new Chain[2];
+	chain = new Chain<>[2];
 	chain[0] = NULL;
-	chain[1] = NULL;
+    chain[1] = NULL;
 
 }
 

@@ -3,6 +3,7 @@
 #include "CardFactory.h"
 #include <exception>
 #include "Chain.h"
+#include "Hand.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class Player {
 	int numCoins;
 	int maxNumChains;
 	Chain<>* chain;
+	Hand hand;
 
 public:
 	Player(std::string&);			// constructor that creates a Player with a given name.

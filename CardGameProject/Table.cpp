@@ -32,7 +32,11 @@ Table::Table(istream & in, const CardFactory* cf)
 
 }
 
-ostream & operator<<(ostream &, Table)
+ostream & operator<<(ostream & out, Table t)
 {
-	// TODO: insert return statement here
+	for (Player player : t.players) {
+		out << player << "\n";
+	}
+	out << "Top of discard pile: " << t.discard << "\n" << "Trading area: " << t.ta;
+	return out;
 }

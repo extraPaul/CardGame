@@ -34,6 +34,11 @@ bool TradeArea::legal(Card *card)
 	return (cards.size() < 3 || contains(cardTypes, card->getName()));
 }
 
+bool TradeArea::empty()
+{
+	return cards.empty();
+}
+
 Card * TradeArea::trade(string name)
 {
 	list<Card*>::iterator it = cards.begin();
