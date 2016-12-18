@@ -35,16 +35,27 @@ Card * DiscardPile::top()
 	return this->back();
 }
 
+bool DiscardPile::isEmpty()
+{
+	if ((*this).size() == 0)
+		return true;
+	return false;
+}
+
 /*
 Text File Format:
 Line 1: Char for each card in discard
 */
 
-void DiscardPile::print(ostream & out)
+void DiscardPile::print(ostream & out)				//print all cards
 {
-	for (vector<Card*>::iterator it = this->begin(); it != this->end(); it++) {
-		(*it)->print(out);
+	if (!isEmpty()) {
+		for (vector<Card*>::iterator it = this->begin(); it != this->end(); it++) {
+			(*it)->print(out);
+		}
 	}
+	else
+		out << "Discard pile is empty";
 }
 
 DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const adapt method otherwise
@@ -66,6 +77,9 @@ DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const ada
 
 ostream & operator<<(ostream & out, DiscardPile dp)
 {
-	dp.back()->print(out);
+	if (!dp.isEmpty()) {
+		dp.back()->print(out);
+	}
+	
 	return out;
 }

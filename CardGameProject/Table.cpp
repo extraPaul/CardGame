@@ -24,8 +24,15 @@ bool Table::win(string & name)
 	return deck.empty();
 }
 
-void Table::printHand(bool)
+void Table::printHand(bool notTopCard)
 {
+	if (notTopCard) {
+																					//might/should be deleted
+	}
+	else {
+
+
+	}
 }
 
 Table::Table(istream & in, CardFactory* cf)
@@ -64,3 +71,14 @@ ostream & operator<<(ostream & out, Table t)
 	
 	return out;
 }
+
+
+//for testing only
+void Table::print() {
+		cout << players[0] << "\n";
+		cout << players[1] << "\n";
+		cout << "Top of discard pile:\n" << *discard << "\n" << "Trading area:\n" << *ta;
+
+}
+
+

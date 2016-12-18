@@ -29,8 +29,8 @@ public:
 									//argument true) to the supplied ostream.
 	Player(istream&, CardFactory*); //constructor that accepts an istream and reconstruct the Player from file
 	friend ostream & operator << (ostream &, Player);
-	template<class T> bool addChain();		//return false if the chain can't be added.
-	bool addToChain(Card*);
+	//template<class T> bool addChain();		//return false if the chain can't be added.
+	//bool addToChain(Card*);
 };
 
 
@@ -39,5 +39,13 @@ class NotEnoughCoins : public exception
 	virtual const char* what() const throw()
 	{
 		return "Not enough coins to buy a thirs chain";
+	}
+};
+
+class ChainDoesntExist : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Chain index is out of bounds";
 	}
 };

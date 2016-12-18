@@ -5,14 +5,17 @@ int main() {
 	char answer;
 	bool pause = false;
 	Table* table;
-	cout << "Entrez n pour commencer un nouveau jeux, ou s pour reprendre un jeux sauvegardé. ";
+	cout << "Entrez n pour commencer un nouveau jeu, ou s pour reprendre un jeu sauvegarde. ";
 	cin >> answer;
 	if (answer == 'n') {
+		cin.ignore(256, '\n'); //empty cin for next input
 		string name1, name2;
 		cout << "Entrez le nom du premier joueur: ";
-		getline(cin, name1);
-		cout << "Entrez le nom du deuxième joueur: ";
+		getline(cin, name1, '\n');
+		cin.clear();
+		cout << "Entrez le nom du deuxieme joueur: " ;
 		getline(cin, name2);
+
 		table = new Table(name1, name2);
 	}
 	else {
@@ -24,6 +27,12 @@ int main() {
 
 	}
 
+
+	(*table->ta) += (new Emerald());
+	(*table->discard) += (new Quartz());
+	table->print();			//for testing purpose
+	
+	
 	while (!table->deck.empty()) {
 		if (pause) {
 			//Save game to file and exit
@@ -35,6 +44,7 @@ int main() {
 				//Display table
 				cout << table << "\n";
 				player += table->deck.draw();
+
 				if (!table->ta->empty()) {
 					for (string type : table->ta->cardTypes) {
 						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
@@ -43,12 +53,12 @@ int main() {
 							Card* temp = table->ta->trade(type);
 							while (temp) {
 								//Add to correct chain.
-								if (player.addToChain(temp)) {
+								/*if (player.addToChain(temp)) {
 									temp = table->ta->trade(type);
 								}
 								else {
 
-								}
+								}*/
 							}
 						}
 					}
@@ -59,7 +69,7 @@ int main() {
 
 	}
 
-
-
+	cout << endl << endl;
+	system("pause");
 	return 0;
 }
