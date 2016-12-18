@@ -13,7 +13,6 @@ public:
 	int numCards();
 	friend ostream & operator << (ostream &, TradeArea);
 	TradeArea(istream&, const CardFactory*);
-private:
 	list<Card*> cards;
 	list<string> cardTypes;
 };

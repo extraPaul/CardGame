@@ -2,12 +2,12 @@
 
 int main() {
 	//Setup
-	int setup;
+	char answer;
 	bool pause = false;
 	Table* table;
-	cout << "Entrez 0 pour commencer un nouveau jeux, ou 1 pour reprendre un jeux sauvegardé. ";
-	cin >> setup;
-	if (setup == 0) {
+	cout << "Entrez n pour commencer un nouveau jeux, ou s pour reprendre un jeux sauvegardé. ";
+	cin >> answer;
+	if (answer == 'n') {
 		string name1, name2;
 		cout << "Entrez le nom du premier joueur: ";
 		getline(cin, name1);
@@ -17,9 +17,9 @@ int main() {
 	}
 	else {
 		//load old game
-		
+
 	}
-	
+
 	while (!table->deck.empty) {
 		if (pause) {
 			//Save game to file and exit
@@ -30,7 +30,16 @@ int main() {
 			for (Player player : table->players) {
 				//Display table
 				cout << table << "\n";
+				player += table->deck.draw();
+				if (!table->ta.empty()) {
+					for (string type : table->ta.cardTypes) {
+						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
+						cin >> answer;
+						if (answer == 'y') {
 
+						}
+					}
+				}
 			}
 
 		}
