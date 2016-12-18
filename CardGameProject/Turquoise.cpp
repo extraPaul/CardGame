@@ -6,7 +6,7 @@ public:
 	const int NUMCARDS = 12;
 
 	int getCardsPerCoin(int coins) {
-		if (0 < coins < 4)
+		if (0 < coins && coins < 4)
 			return 2 * coins;
 		else if (coins == 4)
 			return 7;

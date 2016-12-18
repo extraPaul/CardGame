@@ -20,7 +20,7 @@ class Deck;
 
 class CardFactory {
 private:
-	Deck deck;
+	Deck *deck;
 	CardFactory(const CardFactory&);
 	CardFactory();
 

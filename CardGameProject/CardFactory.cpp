@@ -6,42 +6,42 @@ CardFactory::CardFactory() {
 	for (int i = 0; i < 8; i++)
 	{
 		newCard = new Amethyst();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 6; i++)
 	{
 		newCard = new Emerald();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 18; i++)
 	{
 		newCard = new Hematite();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 14; i++)
 	{
 		newCard = new Malachite();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 16; i++)
 	{
 		newCard = new Obsidian();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 20; i++)
 	{
 		newCard = new Quartz();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 10; i++)
 	{
 		newCard = new Ruby();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 	for (int i = 0; i < 12; i++)
 	{
 		newCard = new Turquoise();
-		deck.push_back(newCard);
+		deck->push_back(newCard);
 	}
 }
 
@@ -55,9 +55,9 @@ Deck CardFactory::getDeck()
 {
 	// obtain a time-based seed -- source: cplusplus.com/reference/algorithm/shuffle/
 	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-	shuffle(deck.begin(), deck.end(), default_random_engine(seed));
+	shuffle(deck->begin(), deck->end(), default_random_engine(seed));
 
-	return deck;
+	return *deck;
 }
 
 

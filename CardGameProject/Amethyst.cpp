@@ -6,7 +6,7 @@ public:
 	const static int NUMCARDS = 8;	//Possiblement inutile
 
 	int getCardsPerCoin(int coins) {
-		if (0 < coins < 5)
+		if (0 < coins && coins < 5)
 			return coins + 1;
 	}
 
