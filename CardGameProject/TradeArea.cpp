@@ -82,9 +82,18 @@ int TradeArea::numCards()
 	return cards->size();
 }
 
-TradeArea::TradeArea(istream & in, const CardFactory *cf)
+TradeArea::TradeArea(istream & in, CardFactory *cf)
 {
-
+	char cardType[150];
+	char dummy[150];
+	in.getline(dummy, 150); //line title in the file
+	in.getline(cardType, 150);
+	int i = 0;
+	while (cardType[i] == NULL) {
+		Card* cardToAdd = ((*cf).getCard(cardType[i]));
+		(*this) += cardToAdd;										
+		i++;
+	}
 
 }
 

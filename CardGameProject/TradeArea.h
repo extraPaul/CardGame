@@ -14,7 +14,7 @@ public:
 	Card* trade(string);
 	int numCards();
 	friend ostream & operator << (ostream &, TradeArea);
-	TradeArea(istream&, const CardFactory* );
+	TradeArea(istream&, CardFactory* );
 	list<Card*>* cards;
 	list<string> cardTypes;
 };
