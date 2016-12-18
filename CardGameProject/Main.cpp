@@ -1,7 +1,7 @@
 #include "Table.h"
 
 
-static void BuyOrSellChain(Player player) {
+static void BuyOrSellChain(Player player, bool optional) {
 	bool askExchange = true;
 	char answer;
 	if (player.getMaxNumChains() < 3) {
@@ -19,14 +19,20 @@ static void BuyOrSellChain(Player player) {
 		}
 	}
 	if (askExchange) {
-		cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
-		cin >> answer;
-		if (answer == 'y') {
+		if (optional) {
+			cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
+			cin >> answer;
+		}
+		else {
+			cout << "Vous devez vendre une chaine et la remplacer.\n";
+		}
+		if (answer == 'y' || !optional) {
 			int choix = 0;
 			while (!choix) {
 				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
 				cin >> choix;
 				if (!(0 < choix && choix <= player.getNumChains())) {
+					cout << "Position invalide, essayez de nouveau. "; 
 					choix = 0;
 				}
 			}
@@ -37,7 +43,33 @@ static void BuyOrSellChain(Player player) {
 	}
 }
 
-
+static void pickUpFromTradingArea(Table* table, Player player, bool discard) {
+	char answer;
+	for (string type : table->ta->cardTypes) {
+		//TODO Une carte à la foix ou tous enssemble?
+		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
+		cin >> answer;
+		if (answer == 'y') {
+			Card* temp = table->ta->trade(type);
+			while (temp) {
+				//Add to correct chain.
+				if (player.addToChain(temp)) {
+					temp = table->ta->trade(type);
+				}
+				else {
+					BuyOrSellChain(player, true);
+				}
+			}
+		}	//else add them to discard.
+		else if(discard) {
+			Card* temp = table->ta->trade(type);
+			while (temp) {
+				(*table->discard) += temp;
+				temp = table->ta->trade(type);
+			}
+		}
+	}
+}
 
 
 int main() {
@@ -58,7 +90,11 @@ int main() {
 
 		table = new Table(name1, name2);
 
-		//TODO pick up cards.
+		for (Player player : table->players) {
+			for (int i = 0; i < 5; i++){
+				player += table->deck.draw();
+			}
+		}
 	}
 	else {
 		//load old game
@@ -76,6 +112,10 @@ int main() {
 
 
 	while (!table->deck.empty()) {
+		cout << "Voullez-vous pauser la game? (y/n)";
+		cin >> answer;
+		if (answer == 'y')
+			pause = true;
 		if (pause) {
 			//Save game to file and exit
 
@@ -88,44 +128,65 @@ int main() {
 				player += table->deck.draw();
 
 				if (!table->ta->empty()) {
-					for (string type : table->ta->cardTypes) {
-						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
-						cin >> answer;
-						if (answer == 'y') {
-							Card* temp = table->ta->trade(type);
-							while (temp) {
-								//Add to correct chain.
-								if (player.addToChain(temp)) {
-									temp = table->ta->trade(type);
-								}
-								else {
-									BuyOrSellChain(player);
-								}
-							}
-						}	//else add them to discard.
-						else {
-							Card* temp = table->ta->trade(type);
-							while (temp) {
-								(*table->discard) += temp;
-								temp = table->ta->trade(type);
-							}
-						}
-					}	//done with Trade Area (Étape 1)
-
-					//Étape 2
+					pickUpFromTradingArea(table, player, true);
+				}//done with Trade Area (Étape 1)
+				//Étape 2
+				cout << "Vous jouez la première carte de votre main: " << player.getHand().top() << "\n";
+				bool keepPlaying = true;
+				while (keepPlaying) {
 					Card* cardPlayed = player.getHand().play();
-					cout << "Vous jouez la première carte de votre main: " << cardPlayed << "\n";
-					bool keepPlaying = true;
-					while (keepPlaying) {
-						if (player.addToChain(cardPlayed)) {
-							cout << "Voulez-vous jouer";
+					if (player.addToChain(cardPlayed)) {
+						for (int i = 0; i < player.getNumChains(); i++) {
+							if (player[i].sell() > 0) {
+								cout << "Vous avez vendu une chaine!";
+								//TODO print chains?
+								player.sellChain(i);
+							}
 						}
-						else {
-							BuyOrSellChain(player);
+						if (0 < player.getHand().size()) {
+							cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand().top() << " (y/n)";
+							cin >> answer;
+							if (answer == 'n')
+								keepPlaying = false;
 						}
 					}
+					else {
+						BuyOrSellChain(player, false);
+					}
+				} //Fin Étape 2 et 3
+
+				//Étape 4
+				if (0 < player.getHand().size()) {
+					cout << "Voulez-vous vous débarassez d'une carte? (y/n)" << player.getHand();
+					cin >> answer;
+					if (answer == 'y') {
+						int choix = 0;
+						while (!choix) {
+							cout << "De quel carte voulez-vous vous débarasser?\n(Entrez la position de la carte, en commensant à 1)";
+							cin >> choix;
+							if (!(0 < choix && choix <= player.getHand().size())) {
+								cout << "Position invalide, essayez de nouveau. ";
+								choix = 0;
+							}
+						}
+						choix--;
+						(*table->discard) += player.getHand()[choix];
+					}
+				} //Fin Étape 4
 					
+				//Étape 5
+				for (int i = 0; i < 3; i++){
+					(*table->ta) += table->deck.draw();
 				}
+				while (table->ta->legal(table->discard->top())) {
+					(*table->ta) += table->discard->pickUp();
+				}
+				pickUpFromTradingArea(table, player, false);
+				//Fin Étape 5
+
+				//Étape 6
+				player += table->deck.draw();
+				player += table->deck.draw();
 			}
 
 		}
