@@ -35,12 +35,12 @@ int main() {
 				//Display table
 				cout << table << "\n";
 				player += table->deck.draw();
-				if (!table->ta.empty()) {
-					for (string type : table->ta.cardTypes) {
+				if (!table->ta->empty()) {
+					for (string type : table->ta->cardTypes) {
 						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 						cin >> answer;
 						if (answer == 'y') {
-							Card* temp = table->ta.trade(type);
+							Card* temp = table->ta->trade(type);
 							while (temp) {
 								//Add to correct chain.
 								//New opperator in player?
