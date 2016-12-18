@@ -29,55 +29,47 @@ bool containsName(Container const& c, typename Container::const_reference v) {
 
 TradeArea::TradeArea()
 {
+	cards = new list<Card*>;
+	cardTypes = list<string>();
 }
 
 TradeArea::~TradeArea()
-{
+{/*
 	//Make sure that each card is deleted.
-	for (auto&& card : cards){
+	for (auto&& card : *cards){
 		delete card;
 	}
-	cards.clear();
-	cardTypes.clear();
+	cards->clear();
+	cardTypes.clear();*/
 }
 
 TradeArea & TradeArea::operator+=(Card *card)
 {
 	
-	/*list<list<Card*>::iterator>::iterator first = cardTypes.begin();
-	list<list<Card*>::iterator>::iterator last = cardTypes.end();
-	while (first != last) {
-		if ((**first)->getName().compare(card->getName()) == 0) {
-			cards.push_front(card);
-
-		}
-		++first;
-	}*/
-
-	cards.push_front(card);
+	(*cards).insert((*cards).begin(), card);
 	if (!contains(cardTypes, card->getName()))
-		cardTypes.push_front(card->getName());
+		cardTypes.emplace_front(card->getName());
 
 	return *this;
 }
 
 bool TradeArea::legal(Card *card)
 {
-	return (cards.size() < 3 || contains(cardTypes, card->getName()));
+	return (cards->size() < 3 || contains(cardTypes, card->getName()));
 }
 
 bool TradeArea::empty()
 {
-	return cards.empty();
+	return cards->empty();
 }
 
 Card * TradeArea::trade(string name)
 {
-	list<Card*>::iterator it = cards.begin();
-	while (it != cards.end()) {
+	list<Card*>::iterator it = cards->begin();
+	while (it != cards->end()) {
 		if (name.compare((*(*it)).getName()) == 0) {
 			Card* temp = *it;
-			cards.erase(it);
+			cards->erase(it);
 			return temp;
 		}
 	}
@@ -87,7 +79,7 @@ Card * TradeArea::trade(string name)
 
 int TradeArea::numCards()
 {
-	return cards.size();
+	return cards->size();
 }
 
 TradeArea::TradeArea(istream & in, const CardFactory *cf)
@@ -103,8 +95,10 @@ Line 1: Char for each card
 
 ostream & operator<<(ostream & out, TradeArea ta)
 {
-	for (list<Card*>::iterator it = ta.cards.begin(); it != ta.cards.end(); it++) {
+	for (list<Card*>::iterator it = ta.cards->begin(); it != ta.cards->end(); it++) {
 		(*it)->print(out);
 	}
 	return out;
+
 }
+

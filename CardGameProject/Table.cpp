@@ -8,6 +8,8 @@ Table::Table(string & name1, string & name2)
 	players.push_back(player2);
 	discard = new DiscardPile();
 	ta= new TradeArea();
+	CardFactory *cf = CardFactory::getFactory();
+	deck = cf->getDeck();
 }
 
 Table::~Table()
@@ -76,8 +78,13 @@ ostream & operator<<(ostream & out, Table t)
 //for testing only
 void Table::print() {
 		cout << players[0] << "\n";
+		players[0].printHand(cout, true);
+		cout << endl;
 		cout << players[1] << "\n";
+		players[1].printHand(cout, true);
+		cout << endl;
 		cout << "Top of discard pile:\n" << *discard << "\n" << "Trading area:\n" << *ta;
+		cout << endl<< "Deck:\n" << deck << endl;
 
 }
 

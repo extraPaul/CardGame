@@ -12,7 +12,7 @@ class Player {
 	int numCoins;
 	int maxNumChains;
 	vector<Chain<Card>> chains;
-	Hand hand;
+	Hand *hand;
 
 public:
 	Player(std::string&);			// constructor that creates a Player with a given name.
@@ -32,7 +32,7 @@ public:
 	//template<class T> bool addChain();		//return false if the chain can't be added.
 	//bool addToChain(Card*);
 	void sellChain(int i);
-	Hand getHand() { return hand; }
+	Hand* getHand() { return hand; }
 
 private:
 	void addChain(char);

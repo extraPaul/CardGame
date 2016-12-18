@@ -3,6 +3,7 @@
 
 CardFactory::CardFactory() {
 	Card * newCard;
+	deck = new Deck();
 	for (int i = 0; i < 8; i++)
 	{
 		newCard = new Amethyst();

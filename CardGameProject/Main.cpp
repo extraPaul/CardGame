@@ -20,19 +20,40 @@ int main() {
 	}
 	else {
 		//load old game
-		string name = "hello";
-		string name2 = "yolo";
+		string name = "ISA";
+		string name2 = "PAUL";
 		table = new Table(name,name2);
 
 
 	}
+	
+	CardFactory *cf = CardFactory::getFactory();
+	cout << table->deck << endl<<endl;
+	table->players[0] += table->deck.draw();
+	table->players[0] += table->deck.draw();
+	table->players[0] += table->deck.draw();
+	table->players[0] += table->deck.draw();
+	cout << table->deck << endl << endl;
+	table->players[1] += table->deck.draw();
+	table->players[1] += table->deck.draw();
+	table->players[1] += table->deck.draw();
+	table->players[1] += table->deck.draw();
+	cout << table->deck << endl << endl;
 
-
-	(*table->ta) += (new Emerald());
-	(*table->discard) += (new Quartz());
 	table->print();			//for testing purpose
-	
-	
+
+	(*table->ta) += (table->players[0]).getHand()->play();
+	(*table->discard) += (table->players[1]).getHand()->play();
+
+
+	cout << "after discarding" << endl << endl;
+	//table->print();			//for testing purpose
+
+	table->print();			//for testing purpose
+	table->print();			//for testing purpose
+	table->print();			//for testing purpose
+
+	/*
 	while (!table->deck.empty()) {
 		if (pause) {
 			//Save game to file and exit
@@ -102,7 +123,7 @@ int main() {
 
 		}
 
-	
+	*/
 
 	cout << endl << endl;
 	system("pause");

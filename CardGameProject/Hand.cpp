@@ -5,8 +5,8 @@
 //back est la premiere carte 
 //size - position pour avoir la position
 
-Hand& Hand ::operator+=(Card*cardToAdd) {
-	(*this).push_back(cardToAdd);
+Hand& Hand ::operator+=(Card*cardToAdd) {  
+	(*this).insert(begin(), cardToAdd);
 	return *this;
 
 }//a joute une carte derrière la dernière carte de la main.
@@ -51,7 +51,7 @@ Hand:: Hand(std::istream& in, CardFactory* cf) {
 ostream & operator<<(ostream & out, Hand h)
 {
 	// TODO: make sure cards are in order
-	for (vector<Card*>::iterator it = h.begin(); it != h.end(); it++) {
+	for (vector<Card*>::reverse_iterator it = h.rbegin(); it != h.rend(); it++) {
 		(**it).print(out);
 	}
 	return out;

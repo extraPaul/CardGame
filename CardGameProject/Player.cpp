@@ -4,6 +4,7 @@ Player:: Player(string &playerName) {											//quoi faire avec la reference
 	name = playerName;
 	numCoins = 0;
 	maxNumChains = 2;
+	hand = new Hand();
 }
 
 
@@ -22,7 +23,7 @@ Player& Player:: operator +=(int i) {
 
 Player & Player::operator+=(Card *card)
 {
-	hand += card;
+	*hand += card;
 	return *this;
 }
 
@@ -57,11 +58,11 @@ void Player:: buyThirdChain() {
 
 void Player::printHand(ostream& out, bool notTopCard) {
 	if (notTopCard) {
-		out << hand;
+		out << *hand;
 	}
 	else {
 
-		out << hand.top();
+		out << hand->top();
 	}
 																					
 
