@@ -1,6 +1,9 @@
+#ifndef Card_h
+#define Card_h
+
 #include <iostream>
 #include <string>
-//#include "Deck.h"
+#include "Deck.h"
 #include "CardFactory.h"
 
 using namespace std;
@@ -11,3 +14,4 @@ public:
 	virtual string getName() = 0;
 	virtual void print(ostream&) = 0;
 };
+#endif

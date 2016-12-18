@@ -10,44 +10,46 @@
 
 
 CardFactory::CardFactory() {
+	deck = Deck(this);
+	Card * newCard;
 	for (int i = 0; i < 8; i++)
 	{
-		Amethyst newCard;
+		newCard = new Amethyst();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 6; i++)
 	{
-		Emerald newCard;
+		newCard = new Emerald();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 18; i++)
 	{
-		Hematite newCard;
+		newCard = new Hematite();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 14; i++)
 	{
-		Malachite newCard;
+		newCard = new Malachite();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 16; i++)
 	{
-		Obsidian newCard;
+		newCard = new Obsidian();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 20; i++)
 	{
-		Quartz newCard;
+		newCard = new Quartz();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		Ruby newCard;
+		newCard = new Ruby();
 		deck.push_back(newCard);
 	}
 	for (int i = 0; i < 12; i++)
 	{
-		Turquoise newCard;
+		newCard = new Turquoise();
 		deck.push_back(newCard);
 	}
 }
