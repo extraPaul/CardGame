@@ -2,6 +2,15 @@
 
 //Top card is the back of the vector.
 
+DiscardPile::DiscardPile()
+{
+	//empty Discard pile
+}
+
+DiscardPile::~DiscardPile()
+{
+}
+
 DiscardPile & DiscardPile::operator+=(Card *card)
 {
 	(*this).push_back(card);

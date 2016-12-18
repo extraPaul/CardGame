@@ -18,9 +18,9 @@ Card * Deck::draw()
 	}
 }
 
-Deck::Deck()
+Deck::Deck(CardFactory* cf)
 {
-	//do nothing
+	*this = (*cf).getDeck();
 }
 
 ostream & operator<<(ostream & out, Deck d)

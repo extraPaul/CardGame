@@ -6,6 +6,20 @@ bool contains(Container const& c, typename Container::const_reference v) {
 	return std::find(c.begin(), c.end(), v) != c.end();
 }
 
+TradeArea::TradeArea()
+{
+}
+
+TradeArea::~TradeArea()
+{
+	//Make sure that each card is deleted.
+	for (auto&& card : cards){
+		delete card;
+	}
+	cards.clear();
+	cardTypes.clear();
+}
+
 TradeArea & TradeArea::operator+=(Card *card)
 {
 	cards.push_front(card);

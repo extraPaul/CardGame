@@ -2,6 +2,7 @@
 #include "Deck.h"
 #include "DiscardPile.h"
 #include "TradeArea.h"
+#include "CardFactory.h"
 
 class Table {
 public:
@@ -11,7 +12,7 @@ public:
 	TradeArea ta;
 
 public:
-	Table();
+	Table(string& name1, string& name2);
 	~Table();
 	bool win(string&);
 	void printHand(bool);

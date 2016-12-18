@@ -1,5 +1,14 @@
 #include "Table.h"
 
+Table::Table(string & name1, string & name2)
+{
+	CardFactory cf;
+	Player player1(name1);
+	Player player2(name2);
+	players.push_back(player1);
+	players.push_back(player2);
+}
+
 Table::~Table()
 {
 }

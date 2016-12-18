@@ -4,6 +4,8 @@
 
 class TradeArea {
 public:
+	TradeArea();
+	~TradeArea();
 	TradeArea& operator += (Card*);
 	bool legal(Card*);
 	Card* trade(string);

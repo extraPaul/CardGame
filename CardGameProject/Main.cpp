@@ -11,6 +11,10 @@ int main() {
 		getline(cin, name1);
 		cout << "Entrez le nom du deuxième joueur: ";
 		getline(cin, name2);
+		Table table(name1, name2);
+	}
+	else {
+		//load old game
 	}
 	
 
