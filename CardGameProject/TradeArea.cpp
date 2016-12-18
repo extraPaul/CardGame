@@ -6,6 +6,27 @@ bool contains(Container const& c, typename Container::const_reference v) {
 	return std::find(c.begin(), c.end(), v) != c.end();
 }
 
+template<class InputIterator, class T>
+InputIterator findName(InputIterator first, InputIterator last, const T& val)
+{
+	while (first != last) {
+		if ((*first)->getName().compare(val) == 0) return first;
+		++first;
+	}
+	return last;
+}
+
+template <typename Container>
+bool containsName(Container const& c, typename Container::const_reference v) {
+	list<Card*>::iterator first = c.begin();
+	list<Card*>::iterator last = c.end();
+	while (first != last) {
+		if ((*first)->getName().compare(v) == 0) return true;
+		++first;
+	}
+	return false;
+}
+
 TradeArea::TradeArea()
 {
 }
@@ -22,6 +43,17 @@ TradeArea::~TradeArea()
 
 TradeArea & TradeArea::operator+=(Card *card)
 {
+	
+	/*list<list<Card*>::iterator>::iterator first = cardTypes.begin();
+	list<list<Card*>::iterator>::iterator last = cardTypes.end();
+	while (first != last) {
+		if ((**first)->getName().compare(card->getName()) == 0) {
+			cards.push_front(card);
+
+		}
+		++first;
+	}*/
+
 	cards.push_front(card);
 	if (!contains(cardTypes, card->getName()))
 		cardTypes.push_front(card->getName());

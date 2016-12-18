@@ -20,7 +20,7 @@ int main() {
 
 	}
 
-	while (!table->deck.empty) {
+	while (!table->deck.empty()) {
 		if (pause) {
 			//Save game to file and exit
 
@@ -36,7 +36,11 @@ int main() {
 						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 						cin >> answer;
 						if (answer == 'y') {
-
+							Card* temp = table->ta.trade(type);
+							while (temp) {
+								//Add to correct chain.
+								//New opperator in player?
+							}
 						}
 					}
 				}
