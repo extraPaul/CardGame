@@ -8,6 +8,8 @@
 #include "Deck.h"
 #include "Card.h"
 
+//class Deck;
+
 class CardFactory {
 private:
 	Deck deck;

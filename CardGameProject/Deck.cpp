@@ -29,7 +29,7 @@ Text File Format:
 Line 1: Char for each card
 */
 
-s{
+ostream & operator<<(ostream & out, Deck d) {
 	for (vector<Card*>::iterator it = d.begin(); it != d.end(); it++) {
 		(*it)->print(out);
 	}
