@@ -115,6 +115,7 @@ bool Player::addToChain(Card * card)
 
 void Player::sellChain(int i){
 	numCoins += (*this)[i].sell();
+
 }
 
 void Player::addChain(char type)

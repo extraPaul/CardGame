@@ -5,12 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CardGameProject", "CardGameProject\CardGameProject.vcxproj", "{C9D23753-CD72-456F-84F0-E321FE0ECDC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{805D0255-2556-422E-A9FB-BA471EBFF90E}"
-	ProjectSection(SolutionItems) = preProject
-		CardGameProject\Player.cpp = CardGameProject\Player.cpp
-		CardGameProject\Player.h = CardGameProject\Player.h
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

@@ -89,7 +89,7 @@ int main() {
 												}
 											}
 											choix--;
-											player += player[choix].sell();
+											player.sellChain(choix);
 											
 										}
 									}
