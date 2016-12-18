@@ -17,5 +17,5 @@ public:
 	bool win(string&);
 	void printHand(bool);
 	friend ostream & operator << (ostream &, Table);
-	Table(istream&, const CardFactory*);
+	Table(istream&, CardFactory*);
 };

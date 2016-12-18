@@ -10,8 +10,21 @@ class IllegalType : public exception
 
 
 template<class T>
-inline Chain<T>::Chain(const istream &, CardFactory *)
+Chain<T>::Chain(istream & in , CardFactory * cf)
 {
+
+	string chainTitle;
+	getline(in, chainTitle, '\t');
+	char type[256];
+	in.getline(type, 256);
+
+	while (type != NULL) {
+		if (type != ' ') {
+			Card* cardToAdd = ((*cf).getCard(type));
+			(*this).push_back(cardToAdd);
+		}															//check if right order
+		i++;
+	}
 
 }
 

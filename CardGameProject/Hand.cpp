@@ -31,13 +31,14 @@ Card* Hand ::operator[](int position) {
 
 Hand:: Hand(std::istream& in, CardFactory* cf) {
 	char cardType[150];
-	char dummy[50];
-	in.getline(dummy, 256); //line title in the file
-	in.getline(cardType, 256);
+	char dummy[150];
+	in.getline(dummy, 150); //line title in the file
+	in.getline(cardType, 150);
 	int i = 0;
 	while (cardType[i] == NULL) {
 		Card* cardToAdd = ((*cf).getCard(cardType[i]));
 		(*this).push_back(cardToAdd);										//check if right order
+		i++;
 	}
 
 }													
@@ -50,8 +51,8 @@ Hand:: Hand(std::istream& in, CardFactory* cf) {
 ostream & operator<<(ostream & out, Hand h)
 {
 	// TODO: make sure cards are in order
-	for (vector<Card>::iterator it = h.begin(); it != h.end(); it++) {
-		(*it).print(out);
+	for (vector<Card*>::iterator it = h.begin(); it != h.end(); it++) {
+		(**it).print(out);
 	}
 	return out;
 }

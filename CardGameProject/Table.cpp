@@ -28,7 +28,7 @@ void Table::printHand(bool)
 {
 }
 
-Table::Table(istream & in, const CardFactory* cf)
+Table::Table(istream & in, CardFactory* cf)
 {
 	/*Player *player1 = new Player(in, cf);
 	Player *player2 = new Player(in, cf);

@@ -57,6 +57,7 @@ DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const ada
 	while (cardType[i] == NULL) {
 		Card* cardToAdd = ((*cf).getCard(cardType[i]));
 		(*this).push_back(cardToAdd);										//check if right order
+		i++;
 	}
 
 }

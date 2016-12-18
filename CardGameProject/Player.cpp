@@ -62,10 +62,14 @@ void Player::printHand(ostream&, bool) {
 
 
 Player:: Player(istream& in, CardFactory* cf) {
-	//char cardType[150];
-	//in.getline(cardType, 256);
-	
-	cin >> name >> numCoins;
+	getline(in,name, '\t');
+	in >> numCoins;
+	char dummy[150];
+	in.getline(dummy, 150); //word coins
+	while (in.peek() != '\t') {
+		//add chain here 
+		//chains.push_back(new Chain<Card>(in, cf));
+	}
 
 }//constructor that accepts an istream and reconstruct the Player from file
 
@@ -80,10 +84,10 @@ Player:: Player(istream& in, CardFactory* cf) {
 
 ostream & operator<<(ostream & out, Player p)
 {
-	out << p.getName() << ' ' << p.getNumCoins() << " coins\n";
-	for (int i = 0; i < p.getNumChains; i++)
+	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
+	for (int i = 0; i < p.getNumChains(); i++)
 		out << p[i] << '\n';
-
+	out << '\t';
 	return out;
 }
 
