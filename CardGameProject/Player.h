@@ -44,6 +44,12 @@ class NotEnoughCoins : public exception
 	{
 		return "Not enough coins to buy a thirs chain";
 	}
+
+	friend ostream & operator << (ostream & out, NotEnoughCoins e) {
+		out << e.what();
+		return out;
+	}
+
 };
 
 class ChainDoesntExist : public exception
@@ -53,9 +59,6 @@ class ChainDoesntExist : public exception
 		return "Chain index is out of bounds";
 	}
 
-	friend ostream & operator << (ostream & out, NotEnoughCoins e) {
-		out << e.what();
-		return out;
-	}
+	
 	
 };
