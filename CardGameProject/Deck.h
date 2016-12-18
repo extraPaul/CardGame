@@ -3,7 +3,6 @@
 
 #include "Card.h"
 #include <vector>
-
 class CardFactory;
 
 class Deck : public vector<Card*> {

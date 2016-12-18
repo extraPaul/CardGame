@@ -58,8 +58,10 @@ int TradeArea::numCards()
 	return cards.size();
 }
 
-TradeArea::TradeArea(istream &, const CardFactory *)
+TradeArea::TradeArea(istream & in, const CardFactory *cf)
 {
+
+
 }
 
 /*

@@ -4,7 +4,6 @@ Player:: Player(string &playerName) {											//quoi faire avec la reference
 	name = playerName;
 	numCoins = 0;
 	maxNumChains = 2;
-	chains.max_size = maxNumChains;
 	chains.push_back(Chain<Card>());					//not sure if I should add this
 	chains.push_back(Chain<Card>());
 }

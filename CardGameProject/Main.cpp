@@ -32,7 +32,7 @@ int main() {
 				cout << table << "\n";
 				player += table->deck.draw();
 				if (!table->ta.empty()) {
-					for (string type : table->ta.cardTypes) {
+					for (string type : *table->ta.cardTypes) {
 						cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 						cin >> answer;
 						if (answer == 'y') {

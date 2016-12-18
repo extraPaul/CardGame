@@ -1,6 +1,7 @@
 #include "Card.h"
 #include <vector>
 #include <list>
+#include "CardFactory.h"
 
 class TradeArea {
 public:

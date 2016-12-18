@@ -47,7 +47,7 @@ void DiscardPile::print(ostream & out)
 	}
 }
 
-DiscardPile::DiscardPile(istream & in, /*const*/ CardFactory *cf)		//deleted the const adapt method otherwise
+DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const adapt method otherwise
 {
 	char cardType[150];
 	char dummy[50];
