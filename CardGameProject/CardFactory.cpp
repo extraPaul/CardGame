@@ -1,12 +1,4 @@
 #include "CardFactory.h"
-#include "Amethyst.cpp"
-#include "Emerald.cpp"
-#include "Hematite.cpp"
-#include "Malachite.cpp"
-#include "Obsidian.cpp"
-#include "Quartz.cpp"
-#include "Ruby.cpp"
-#include "Turquoise.cpp"
 
 
 CardFactory::CardFactory() {

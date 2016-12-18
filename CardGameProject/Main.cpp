@@ -43,7 +43,12 @@ int main() {
 							Card* temp = table->ta->trade(type);
 							while (temp) {
 								//Add to correct chain.
-								//New opperator in player?
+								if (player.addToChain(temp)) {
+									temp = table->ta->trade(type);
+								}
+								else {
+
+								}
 							}
 						}
 					}

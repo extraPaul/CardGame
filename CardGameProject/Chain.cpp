@@ -29,13 +29,19 @@ Chain<T>::Chain(istream & in , CardFactory * cf)
 }
 
 template<class T>
+bool Chain<T>::legal(Card *card)
+{
+	T temp;
+	return (temp.getName().compare((*card).getName()) == 0);
+}
+
+template<class T>
 Chain<T>& Chain<T>::operator+=(Card *card)
 {
 	//Not sure if used properly? otherwise typeid(first element)
 	//if (typeid(card) == typeid(Card)) {
 
-	T temp;
-	if (temp.getName().compare((*card).getName()) == 0) {
+	if (legal(card)) {
 		this->push_back(card);
 	}
 	else {
