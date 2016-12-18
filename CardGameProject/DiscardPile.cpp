@@ -47,8 +47,18 @@ void DiscardPile::print(ostream & out)
 	}
 }
 
-DiscardPile::DiscardPile(istream &, const CardFactory *)
+DiscardPile::DiscardPile(istream & in, /*const*/ CardFactory *cf)		//deleted the const adapt method otherwise
 {
+	char cardType[150];
+	char dummy[50];
+	in.getline(dummy, 256);//line title in the file
+	in.getline(cardType, 256);
+	int i = 0;
+	while (cardType[i] == NULL) {
+		Card* cardToAdd = ((*cf).getCard(cardType[i]));
+		(*this).push_back(cardToAdd);										//check if right order
+	}
+
 }
 
 

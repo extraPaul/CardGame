@@ -31,18 +31,17 @@ Card* Hand ::operator[](int position) {
 
 Hand:: Hand(std::istream& in, CardFactory* cf) {
 	char cardType[150];
+	char dummy[50];
+	in.getline(dummy, 256); //line title in the file
 	in.getline(cardType, 256);
 	int i = 0;
 	while (cardType[i] == NULL) {
 		Card* cardToAdd = ((*cf).getCard(cardType[i]));
-		(*this).push_back(*cardToAdd);						//check if right order
+		(*this).push_back(*cardToAdd);										//check if right order
 	}
 
 }													
 
-
- //Ajouter également un opérateur d'insertion pour Hand dans un std::ostream. La main doit afficher
- //toutes les cartes dans l'ordre.
 
  /*
  Text File Format:

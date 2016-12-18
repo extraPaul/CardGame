@@ -59,6 +59,6 @@ ostream & operator<<(ostream & out, Table t)
 	for (Player player : t.players) {
 		out << player << "\n";
 	}
-	out << "Top of discard pile: " << t.discard << "\n" << "Trading area: " << t.ta;
+	out << "Top of discard pile:\n" << t.discard << "\n" << "Trading area:\n" << t.ta;
 	return out;
 }

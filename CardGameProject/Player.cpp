@@ -69,8 +69,11 @@ void Player::printHand(ostream&, bool) {
 								//argument true) to the supplied ostream.
 
 
-Player:: Player(const istream& in, CardFactory* cf) {
-																					//implementer
+Player:: Player(istream& in, CardFactory* cf) {
+	//char cardType[150];
+	//in.getline(cardType, 256);
+	
+	cin >> name >> numCoins;
 
 }//constructor that accepts an istream and reconstruct the Player from file
 
@@ -85,7 +88,7 @@ Player:: Player(const istream& in, CardFactory* cf) {
 
 ostream & operator<<(ostream & out, Player p)
 {
-	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
+	out << p.getName() << ' ' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains; i++)
 		out << p[i] << '\n';
 

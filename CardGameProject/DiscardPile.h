@@ -1,4 +1,4 @@
-#include "Card.h"
+#include "CardFactory.h"
 #include <vector>
 
 //should maybe be private?
@@ -11,5 +11,5 @@ public:
 	Card* top();
 	void print(ostream&);
 	friend ostream & operator << (ostream &, DiscardPile);
-	DiscardPile(istream&, const CardFactory*);
+	DiscardPile(istream&, CardFactory*);
 };
