@@ -82,7 +82,7 @@ Player:: Player(istream& in, CardFactory* cf) {
 	}
 
 }
-/*
+
 template<class T>
 bool Player::addChain() {
 	static_assert(std::is_base_of<Card, T>::value, "T is not derived from Card");
@@ -112,19 +112,19 @@ bool Player::addToChain(Card * card)
 	}
 	//else
 	return false;
-}*/
+}
 
 void Player::sellChain(int i){
-	//numCoins += (*this)[i].sell();
-	//chains.erase(chains.begin() + i);
+	numCoins += chains[i].sell();
+	chains.erase(chains.begin() + i);
 }
 
 void Player::addChain(char type)
 {
 	Chain<> newChain;
 	if (type == 'Q') {
-		Chain<Quartz> newChain;
-	}
+		Chain<Quartz> *newChain = new Chain<Quartz>;
+	}/*
 	else if (type == 'H') {
 		Chain<Hematite> newChain;
 	}
@@ -145,7 +145,7 @@ void Player::addChain(char type)
 	}
 	else if (type == 'E') {
 		Chain<Emerald> newChain;
-	}
+	}*/
 	chains.push_back(newChain);
 }
 

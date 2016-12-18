@@ -29,7 +29,7 @@ public:
 		return "Hematite";
 	}
 
-	void print(ostream& out) {
+	void print(ostream& out) const {
 		out << "H";
 	}
 };
