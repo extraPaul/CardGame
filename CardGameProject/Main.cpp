@@ -47,7 +47,40 @@ int main() {
 									temp = table->ta->trade(type);
 								}
 								else {
-
+									bool askExchange = true;
+									if (player.getMaxNumChains() < 3) {
+										cout << "Voulez-vous acheter une nouvelle chaine? (y/n) ";
+										cin >> answer;
+										if (answer == 'y') {
+											try {
+												player.buyThirdChain();
+												//The following is skipped if exception is thrown.
+												askExchange = false;			
+												player[2] += temp;
+												temp = table->ta->trade(type);
+											}
+											catch (NotEnoughCoins e) {
+												cout << e << "\n";
+											}
+										}
+									}
+									if (askExchange) {
+										cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
+										cin >> answer;
+										if (answer == 'y') {
+											int choix = 0;
+											while (!choix) {
+												cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
+												cin >> choix;
+												if (!(0 < choix && choix <= player.getNumChains())) {
+													choix = 0;
+												}
+											}
+											choix--;
+											player += player[choix].sell();
+											
+										}
+									}
 								}
 							}
 						}

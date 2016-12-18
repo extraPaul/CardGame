@@ -31,6 +31,7 @@ public:
 	friend ostream & operator << (ostream &, Player);
 	template<class T> bool addChain();		//return false if the chain can't be added.
 	bool addToChain(Card*);
+	void sellChain(int i);
 
 private:
 	void addChain(char);
@@ -42,5 +43,10 @@ class NotEnoughCoins : public exception
 	virtual const char* what() const throw()
 	{
 		return "Not enough coins to buy a thirs chain";
+	}
+
+	friend ostream & operator << (ostream & out, NotEnoughCoins e) {
+		out << e.what();
+		return out;
 	}
 };

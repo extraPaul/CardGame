@@ -74,7 +74,6 @@ Player:: Player(istream& in, CardFactory* cf) {
 }
 
 template<class T>
-//typename std::enable_if<std::is_base_of<Card, T>::value>::type
 bool Player::addChain() {
 	static_assert(std::is_base_of<Card, T>::value, "T is not derived from Card");
 	if (chains.size() <= maxNumChains) {
@@ -103,6 +102,10 @@ bool Player::addToChain(Card * card)
 	}
 	//else
 	return false;
+}
+
+void Player::sellChain(int i){
+	numCoins += (*this)[i].sell();
 }
 
 void Player::addChain(char type)
