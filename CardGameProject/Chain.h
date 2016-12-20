@@ -12,7 +12,7 @@ public:
 	Chain<T>& operator+= (Card* card);
 	int sell();
 	friend ostream & operator << (ostream & sortie, Chain<T> c) {
-		sortie << c[0]->getName() << '\t';
+		sortie << type << '\t';
 		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
 			sortie << " ";
 			(*it)->print(sortie);
