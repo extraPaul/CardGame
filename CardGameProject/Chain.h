@@ -12,6 +12,8 @@ public:
 	Chain<T>& operator+= (Card* card);
 	int sell();
 	friend ostream & operator << (ostream &, Chain);
+	friend ostream & operator << (ostream &, Chain);
+
 	void addCard(Card* );
 };
 
@@ -103,3 +105,5 @@ ostream & operator<<(ostream & sortie, Chain<T> c)
 	sortie << "\n";
 	return sortie;
 }
+
+

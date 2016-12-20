@@ -175,7 +175,7 @@ ostream & operator<<(ostream & out, Player p)
 {
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains(); i++)
-		//out << p[i] << '\n';
+		out << p[i] << '\n';
 	out << '\t';
 	return out;
 }
