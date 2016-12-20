@@ -130,28 +130,35 @@ void Player::addChain(char type)
 	if (type == 'Q') {
 		ChainBase* newChain = new Chain<Quartz>;
 		chains.addChain(newChain);
-	}/*
+	}
 	else if (type == 'H') {
-		Chain<Hematite> newChain;
+		ChainBase* newChain = new Chain<Hematite>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'O') {
-		Chain<Obsidian> newChain;
+		ChainBase* newChain = new Chain<Obsidian>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'M') {
-		Chain<Malachite> newChain;
+		ChainBase* newChain = new Chain<Malachite>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'T') {
-		Chain<Turquoise> newChain;
+		ChainBase* newChain = new Chain<Turquoise>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'R') {
-		Chain<Ruby> newChain;
+		ChainBase* newChain = new Chain<Ruby>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'A') {
-		Chain<Amethyst> newChain;
+		ChainBase* newChain = new Chain<Amethyst>;
+		chains.addChain(newChain);
 	}
 	else if (type == 'E') {
-		Chain<Emerald> newChain;
-	}*/
+		ChainBase* newChain = new Chain<Emerald>;
+		chains.addChain(newChain);
+	}
 }
 
 
