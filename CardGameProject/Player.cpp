@@ -73,21 +73,21 @@ void Player::printHand(ostream& out, bool notTopCard) {
 
 Player:: Player(istream& in, CardFactory* cf) {
 	getline(in,name, '\t');
+
 	in >> numCoins;
 	in >> maxNumChains;
 	hand = new Hand(in, cf);
 	string dummy;
-	in >> dummy;
-	in >> dummy;
-	in >> dummy;
+	getline(in, dummy);
+	getline(in, dummy);
+	getline(in, dummy);
+
 	//add chain here 
 	//chains.push_back(new Chain<Card>(in, cf));
 	
 
 }
 
-
-/*
 
 template<class T>
 bool Player::addChain() {
@@ -154,8 +154,6 @@ void Player::addChain(char type)
 	}
 	chains.push_back(newChain);
 }
-
-*/
 
 
 //constructor that accepts an istream and reconstruct the Player from file

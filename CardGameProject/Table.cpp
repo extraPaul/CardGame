@@ -4,7 +4,6 @@ Table::Table(string & name1, string & name2)
 {
 	Player player1(name1);
 	Player player2(name2);
-	cout << "after player";
 	players.push_back(player1);
 	players.push_back(player2);
 	discard = new DiscardPile();
@@ -81,7 +80,7 @@ void Table::print() {
 		players[1].printHand(cout, true);
 		cout << endl;
 		cout << "Top of discard pile:\n" << *discard << "\n" << "Trading area:\n" << *ta;
-		cout << endl<< "Deck:\n" << *deck << endl;
+		//cout << endl<< "Deck:\n" << *deck << endl;
 
 }
 

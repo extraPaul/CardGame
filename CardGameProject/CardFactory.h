@@ -28,6 +28,6 @@ public:
 	static CardFactory* getFactory();
 	Deck getDeck();
 	Card* getCard(char);
-	void setDeck (Deck*);
+	void setDeck (istream &);
 };
 #endif

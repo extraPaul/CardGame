@@ -63,14 +63,19 @@ DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const ada
 {
 	char cardType[256];
 	in.getline(cardType, 256);
-	int i = 0;
-	while (cardType[i] == NULL) {
+	int cnt = 0;
+	while (cardType[cnt] != NULL) {
+		cnt++;
+	}
+	cnt--;
+	for (int i = cnt ; i >= 0; i--) {
 		Card* cardToAdd = ((*cf).getCard(cardType[i]));
-		(*this).push_back(cardToAdd);										//check if right order
-		i++;
+		(*this).push_back(cardToAdd);
 	}
 
 }
+
+
 
 
 

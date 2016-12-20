@@ -52,9 +52,18 @@ CardFactory * CardFactory::getFactory()
 	return &cf;
 }
 
-void CardFactory::setDeck(Deck * newDeck)
+void CardFactory::setDeck(istream &in)
 {
-	*deck = *newDeck;
+	deck = new Deck();
+	char cardType[256];
+	in.getline(cardType, 256);
+	int i = 0;
+	while (cardType[i] != NULL) {
+		Card* cardToAdd = getCard(cardType[i]);
+		deck->push_back(cardToAdd);										//check if right order
+		i++;
+	}
+
 }
 
 Deck CardFactory::getDeck()
