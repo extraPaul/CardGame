@@ -6,13 +6,27 @@
 template <class T> class Chain : public ChainBase, public vector<T*> {
 public:
 	// default constructor
-	Chain() = default;
+	Chain();
 	Chain(istream&, CardFactory*);
 	bool legal(Card*);						//returns true if it's legal to add the card to the chain.
 	Chain<T>& operator+= (Card* card);
 	int sell();
-	friend ostream & operator << (ostream &, Chain);
+	friend ostream & operator << (ostream & sortie, Chain c) {
+		sortie << c[0]->getName() << '\t';
+		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
+			sortie << " ";
+			(*it)->print(sortie);
+		}
+		return sortie;
+	};
 	void addCard(Card* );
+	int getSize();
+	string getType();
+protected:
+	string type;
+	void print(ostream& o) const {
+		o << (*this);
+	};
 };
 
 class IllegalType : public exception
@@ -23,6 +37,13 @@ class IllegalType : public exception
 	}
 };
 
+
+template<class T>
+inline Chain<T>::Chain()
+{
+	T temp;
+	type = temp.getName();
+}
 
 template<class T>
 Chain<T>::Chain(istream & in , CardFactory * cf)
@@ -86,13 +107,25 @@ void Chain<T>::addCard(Card * card)
 	(*this) += card;
 }
 
+template<class T>
+inline int Chain<T>::getSize()
+{
+	return this->size();
+}
+
+template<class T>
+inline string Chain<T>::getType()
+{
+	return type;
+}
+
 /*
 Text File Format:
 Line 1: CardType Name \t X X X			 (amount of time)
 */
 
 
-template<class T>
+/*template<class T>
 ostream & operator<<(ostream & sortie, Chain<T> c)
 {
 	sortie << c[0]->getName() << '\t';
@@ -101,4 +134,4 @@ ostream & operator<<(ostream & sortie, Chain<T> c)
 		(*it)->print(sortie);
 	}
 	return sortie;
-}
+}*/

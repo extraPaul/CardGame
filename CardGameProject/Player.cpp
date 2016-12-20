@@ -175,7 +175,7 @@ ostream & operator<<(ostream & out, Player p)
 {
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains(); i++)
-	//	out << p[i] << '\n';
+		out << p[i] << '\n';
 	out << '\t';
 	return out;
 }
@@ -185,7 +185,7 @@ void Player::print(ostream & out)				//print all cards
 	out << getName() << '\t' << getNumCoins() << ' ' << getMaxNumChains() << "\n";
 	out << *hand << "\n";
 	for (int i = 0; i < 3; i++){
-		//	out << p[i] << '\n';
+			//out << p[i] << '\n';
 		out << "NULL" << "\n";
 	}
 		
