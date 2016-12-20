@@ -52,6 +52,11 @@ CardFactory * CardFactory::getFactory()
 	return &cf;
 }
 
+void CardFactory::setDeck(Deck * newDeck)
+{
+	*deck = *newDeck;
+}
+
 Deck CardFactory::getDeck()
 {
 	// obtain a time-based seed -- source: cplusplus.com/reference/algorithm/shuffle/

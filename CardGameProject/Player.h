@@ -27,15 +27,16 @@ public:
 	void printHand(ostream&, bool); //prints the top card of the player's hand (with
 									//argument false) or all of the player's hand (with 
 									//argument true) to the supplied ostream.
+	void print(ostream&);
 	Player(istream&, CardFactory*); //constructor that accepts an istream and reconstruct the Player from file
 	friend ostream & operator << (ostream &, Player);
-	template<class T> bool addChain();		//return false if the chain can't be added.
-	bool addToChain(Card*);
-	void sellChain(int i);
+//	template<class T> bool addChain();		//return false if the chain can't be added.
+//	bool addToChain(Card*);
+//	void sellChain(int i);
 	Hand* getHand() { return hand; }
 
 private:
-	void addChain(char);
+//	void addChain(char);
 };
 
 

@@ -74,14 +74,20 @@ void Player::printHand(ostream& out, bool notTopCard) {
 Player:: Player(istream& in, CardFactory* cf) {
 	getline(in,name, '\t');
 	in >> numCoins;
-	char dummy[150];
-	in.getline(dummy, 150); //word coins
-	while (in.peek() != '\t') {
-		//add chain here 
-		//chains.push_back(new Chain<Card>(in, cf));
-	}
+	in >> maxNumChains;
+	hand = new Hand(in, cf);
+	string dummy;
+	in >> dummy;
+	in >> dummy;
+	in >> dummy;
+	//add chain here 
+	//chains.push_back(new Chain<Card>(in, cf));
+	
 
 }
+
+
+/*
 
 template<class T>
 bool Player::addChain() {
@@ -124,7 +130,7 @@ void Player::addChain(char type)
 	Chain<> newChain;
 	if (type == 'Q') {
 		Chain<Quartz> *newChain = new Chain<Quartz>;
-	}/*
+	}
 	else if (type == 'H') {
 		Chain<Hematite> newChain;
 	}
@@ -145,9 +151,11 @@ void Player::addChain(char type)
 	}
 	else if (type == 'E') {
 		Chain<Emerald> newChain;
-	}*/
+	}
 	chains.push_back(newChain);
 }
+
+*/
 
 
 //constructor that accepts an istream and reconstruct the Player from file
@@ -166,4 +174,15 @@ ostream & operator<<(ostream & out, Player p)
 	//	out << p[i] << '\n';
 	out << '\t';
 	return out;
+}
+
+void Player::print(ostream & out)				//print all cards
+{
+	out << getName() << '\t' << getNumCoins() << ' ' << getMaxNumChains() << "\n";
+	out << *hand << "\n";
+	for (int i = 0; i < 3; i++){
+		//	out << p[i] << '\n';
+		out << "NULL" << "\n";
+	}
+		
 }

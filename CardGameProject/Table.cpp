@@ -4,12 +4,13 @@ Table::Table(string & name1, string & name2)
 {
 	Player player1(name1);
 	Player player2(name2);
+	cout << "after player";
 	players.push_back(player1);
 	players.push_back(player2);
 	discard = new DiscardPile();
 	ta= new TradeArea();
 	CardFactory *cf = CardFactory::getFactory();
-	deck = cf->getDeck();
+	deck = new Deck(cf);
 }
 
 Table::~Table()
@@ -23,7 +24,7 @@ bool Table::win(string & name)
 		name = players[0].getName();
 	else
 		name = players[1].getName();
-	return deck.empty();
+	return deck->empty();
 }
 
 void Table::printHand(bool notTopCard)
@@ -39,19 +40,15 @@ void Table::printHand(bool notTopCard)
 
 Table::Table(istream & in, CardFactory* cf)
 {
-	/*Player *player1 = new Player(in, cf);
+	Player *player1 = new Player(in, cf);
 	Player *player2 = new Player(in, cf);
 
 	players.push_back(*player1);
-	players.push_back(*player1);*/
+	players.push_back(*player2);
 
 	discard = new DiscardPile(in, cf);
 	ta = new TradeArea(in, cf);
-
-
-
-	//  deck = Deck(in, cf);    shouldn we have the deck somewhere?
-
+	deck = new Deck(in, cf);
 
 }
 
@@ -69,7 +66,7 @@ ostream & operator<<(ostream & out, Table t)
 	for (Player player : t.players) {
 		out << player << "\n";
 	}
-	out << "Top of discard pile:\n" << t.discard << "\n" << "Trading area:\n" << t.ta;
+	out << "Top of discard pile:\n" << *t.discard << "\n" << "Trading area:\n" << *t.ta;
 	
 	return out;
 }
@@ -84,7 +81,7 @@ void Table::print() {
 		players[1].printHand(cout, true);
 		cout << endl;
 		cout << "Top of discard pile:\n" << *discard << "\n" << "Trading area:\n" << *ta;
-		cout << endl<< "Deck:\n" << deck << endl;
+		cout << endl<< "Deck:\n" << *deck << endl;
 
 }
 

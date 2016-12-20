@@ -1,8 +1,17 @@
 #include "Deck.h"
 
-Deck::Deck(const istream &stream, CardFactory *cf)
+Deck::Deck(istream &in, CardFactory *cf)
 {
-	*this = (*cf).getDeck();
+	(*this).clear();
+	char cardType[256];
+	in.getline(cardType, 256);
+	int i = 0;
+	while (cardType[i] == NULL) {
+		Card* cardToAdd = ((*cf).getCard(cardType[i]));
+		(*this).push_back(cardToAdd);										//check if right order
+		i++;
+	}
+	cf->setDeck(this);
 }
 
 Card * Deck::draw()
@@ -20,6 +29,8 @@ Card * Deck::draw()
 
 Deck::Deck(CardFactory* cf)
 {
+	cout << "good constructor";
+
 	*this = (*cf).getDeck();
 }
 
