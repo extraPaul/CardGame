@@ -11,7 +11,7 @@ public:
 	bool legal(Card*);						//returns true if it's legal to add the card to the chain.
 	Chain<T>& operator+= (Card* card);
 	int sell();
-	friend ostream & operator << (ostream & sortie, Chain c) {
+	friend ostream & operator << (ostream & sortie, Chain<T> c) {
 		sortie << c[0]->getName() << '\t';
 		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
 			sortie << " ";
