@@ -13,10 +13,12 @@ public:
 	int sell();
 	friend ostream & operator << (ostream & sortie, Chain<T> c) {
 		sortie << c.getType() << '\t';
-		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
-			sortie << " ";
-			(*it)->print(sortie);
+
+		if (c.getSize() > 0) {
+			for (int i = 0; i< c.getSize(); i++)
+				sortie << c.getType().at(0);
 		}
+		
 		return sortie;
 	};
 	void addCard(Card* );

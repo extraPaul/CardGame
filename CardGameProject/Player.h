@@ -53,7 +53,7 @@ public:
 			chain1 = chain;
 		if (n == 1)
 			chain2 = chain;
-		if (n = 2)
+		if (n == 2)
 			chain3 = chain;
 		n++;
 		return true;
