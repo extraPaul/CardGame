@@ -174,11 +174,6 @@ void Player::addChain(char type)
 ostream & operator<<(ostream & out, Player p)
 {
 	out << "\n";
-	p.addChain<Quartz>();
-	p.addToChain(new Quartz());
-	p.addToChain(new Quartz());
-
-	p.addToChain(new Quartz());
 
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains(); i++)
@@ -191,8 +186,10 @@ void Player::print(ostream & out)				//print all cards
 	out << getName() << '\t' << getNumCoins() << ' ' << getMaxNumChains() << "\n";
 	out << *hand << "\n";
 	for (int i = 0; i < 3; i++){
-			//out << p[i] << '\n';
-		out << "NULL" << "\n";
+		if(i<getNumChains())
+			out << chains[i]<< '\n';
+		else
+			out << "NULL" << "\n";
 	}
 		
 }

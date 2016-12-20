@@ -137,7 +137,7 @@ int main() {
 		}
 	}
 	
-	table->print();			//for testing purpose
+	/*table->print();			//for testing purpose
 
 	///////////////////////////////this is all testing stuff
 	CardFactory *cf = CardFactory::getFactory();
@@ -156,12 +156,12 @@ int main() {
 	table->print();			//for testing purpose
 
 	save(*table);
-	//remove("lastGameSaved.txt"); //if game is over
+	//remove("lastGameSaved.txt"); //if game is over*/
 
 
 	//deck is now a pointer in TABLE CAREFULL
 	while (!table->deck->empty()) {
-		cout << "Voullez-vous pauser la game? (y/n)";
+		cout << "Voulez-vous mettre la partie en pause? (y/n)";
 		cin >> answer;
 		if (answer == 'y')
 			pause = true;
@@ -173,21 +173,21 @@ int main() {
 		else {
 			for (Player player : table->players) {
 				//Display table
-				cout << table << "\n";
+				cout << *table << "\n";
 				player += table->deck->draw();
 
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
 				}//done with Trade Area (Étape 1)
 				//Étape 2
-				cout << "Vous jouez la première carte de votre main: " << player.getHand()->top() << "\n";
+				cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
 				bool keepPlaying = true;
 				while (keepPlaying) {
 					Card* cardPlayed = player.getHand()->play();
 					if (player.addToChain(cardPlayed)) {
 						for (int i = 0; i < player.getNumChains(); i++) {
 							if (player[i].sell() > 0) {
-								cout << "Vous avez vendu une chaine!";
+								cout << "Vous avez vendu une chaine!\n";
 								//TODO print chains?
 								player.sellChain(i);
 							}
@@ -206,12 +206,19 @@ int main() {
 
 					//Étape 4
 					if (0 < player.getHand()->size()) {
-						cout << "Voulez-vous vous débarassez d'une carte? (y/n)" << player.getHand();
+						cout << "Votre main: " << *player.getHand() << "\n";
+						cout << "Voulez-vous vous debarasser d'une carte? (y/n)";
+
 						cin >> answer;
 						if (answer == 'y') {
+							cout  << endl << *player.getHand() << "\n";
+							for (int i = 1; i <= player.getHand()->size(); i++) {
+								cout << i;
+							}
+							cout << endl;
 							int choix = 0;
 							while (!choix) {
-								cout << "De quel carte voulez-vous vous débarasser?\n(Entrez la position de la carte, en commensant à 1)";
+								cout << "De quel carte voulez-vous vous debarasser?\nEntrez la position de la carte : ";
 								cin >> choix;
 								if (!(0 < choix && choix <= player.getHand()->size())) {
 									cout << "Position invalide, essayez de nouveau. ";
