@@ -12,7 +12,7 @@ public:
 	Chain<T>& operator+= (Card* card);
 	int sell();
 	friend ostream & operator << (ostream & sortie, Chain<T> c) {
-		sortie << type << '\t';
+		sortie << c.getType() << '\t';
 		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
 			sortie << " ";
 			(*it)->print(sortie);
@@ -67,8 +67,7 @@ Chain<T>::Chain(istream & in , CardFactory * cf)
 template<class T>
 bool Chain<T>::legal(Card *card)
 {
-	T temp;
-	return (temp.getName().compare((*card).getName()) == 0);
+	return (type.compare((*card).getName()) == 0);
 }
 
 template<class T>
