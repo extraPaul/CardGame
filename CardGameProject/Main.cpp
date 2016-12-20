@@ -139,7 +139,6 @@ int main() {
 	
 	table->print();			//for testing purpose
 
-
 	///////////////////////////////this is all testing stuff
 	CardFactory *cf = CardFactory::getFactory();
 	table->players[0] += table->deck->draw();
@@ -150,13 +149,11 @@ int main() {
 	table->players[1] += table->deck->draw();
 	table->players[1] += table->deck->draw();
 	table->players[1] += table->deck->draw();
-
-
 	(*table->ta) += (table->players[0]).getHand()->play();
 	(*table->discard) += (table->players[1]).getHand()->play();
+	(table->players[1]).addToChain(new Quartz());
 
 	table->print();			//for testing purpose
-
 
 	save(*table);
 	//remove("lastGameSaved.txt"); //if game is over
