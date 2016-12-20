@@ -37,7 +37,7 @@ int Player::getNumChains() {
 }
 
 
- Chain<Card> & Player:: operator[](int i) {	
+ ChainBase& Player:: operator[](int i) {	
 	 if (i < getNumChains())
 		 return chains[i];
 	 else
@@ -116,14 +116,14 @@ bool Player::addToChain(Card * card)
 
 void Player::sellChain(int i){
 	numCoins += chains[i].sell();
-	chains.erase(chains.begin() + i);
+	chains.removeChain(i);
 }
 
 void Player::addChain(char type)
 {
-	Chain<> newChain;
 	if (type == 'Q') {
-		Chain<Quartz> *newChain = new Chain<Quartz>;
+		ChainBase* newChain = new Chain<Quartz>;
+		chains.addChain(newChain);
 	}/*
 	else if (type == 'H') {
 		Chain<Hematite> newChain;
@@ -146,7 +146,6 @@ void Player::addChain(char type)
 	else if (type == 'E') {
 		Chain<Emerald> newChain;
 	}*/
-	chains.push_back(newChain);
 }
 
 

@@ -7,11 +7,97 @@
 
 using namespace std;
 
+class ChainDoesntExist : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Chain index is out of bounds";
+	}
+};
+
+//Container of max size 3, for the chains.
+class ChainContainer {
+	int n;
+	ChainBase* chain1;
+	ChainBase* chain2;
+	ChainBase* chain3;
+
+public:
+	ChainContainer() {
+		n = 0;
+		chain1 = NULL;
+		chain2 = NULL;
+		chain3 = NULL;
+	};
+
+	ChainBase & ChainContainer:: operator[](int i) {
+		if (0 <= i && i < n) {
+			if (i == 0)
+				return *chain1;
+			if (i == 1)
+				return *chain2;
+			return *chain3;
+		}	
+		else
+			throw ChainDoesntExist();
+	};
+
+	ChainBase& back() {
+		return (*this)[n - 1];
+	};
+
+	bool addChain(ChainBase* chain) {
+		if (n == 3)
+			return false;
+		if (n == 0)
+			chain1 = chain;
+		if (n == 1)
+			chain2 = chain;
+		if (n = 2)
+			chain3 = chain;
+		n++;
+		return true;
+	};
+
+	int size() { 
+		return n; 
+	};
+
+	bool removeChain() {
+		if (n == 0)
+			return false;
+		if (n == 1)
+			chain1 = NULL;
+		if (n == 2)
+			chain2 = NULL;
+		if (n = 3)
+			chain3 = NULL;
+		n--;
+		return true;
+	};
+
+	bool removeChain(int i) {
+		if (0 <= i && i < n) {
+			if (i == 0) {
+				chain1 = chain2;
+			}
+			if (i <= 1) {
+				chain2 = chain3;
+			}
+			chain3 = NULL;
+			n--;
+			return true;
+		}
+		else
+			throw ChainDoesntExist();
+	};
+};
+
 class Player {
 	string name;
 	int numCoins;
 	int maxNumChains;
-	vector<Chain<Card>> chains;
+	ChainContainer chains;
 	Hand *hand;
 
 public:
@@ -22,7 +108,7 @@ public:
 	Player& operator+=(Card*);		// add a card to the player's hand
 	int getMaxNumChains();			// returns either 2 or 3.
 	int getNumChains();				// returns the number of non - zero chains
-	Chain<>& operator[](int i);		// returns the chain at position i.
+	ChainBase& operator[](int i);		// returns the chain at position i.
 	void buyThirdChain();			//adds an empty third chain to the player for two coins
 	void printHand(ostream&, bool); //prints the top card of the player's hand (with
 									//argument false) or all of the player's hand (with 
@@ -51,15 +137,4 @@ class NotEnoughCoins : public exception
 		return out;
 	}
 
-};
-
-class ChainDoesntExist : public exception
-{
-	virtual const char* what() const throw()
-	{
-		return "Chain index is out of bounds";
-	}
-
-	
-	
 };
