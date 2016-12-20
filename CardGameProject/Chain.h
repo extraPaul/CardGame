@@ -12,11 +12,16 @@ public:
 	Chain<T>& operator+= (Card* card);
 	int sell();
 	friend ostream & operator << (ostream & sortie, Chain<T> c) {
-		sortie << type << '\t';
+		sortie << c.getType() << '\t';
+		if (c.getSize() > 0) {
+			for (int i = 0; i< c.getSize(); i++)
+				sortie << c.getType().at(0);
+		}
+		/*
 		for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
 			sortie << " ";
-			(*it)->print(sortie);
-		}
+			(*it)->print(sortie);*/
+		
 		return sortie;
 	};
 	void addCard(Card* );

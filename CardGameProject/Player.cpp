@@ -172,16 +172,17 @@ void Player::addChain(char type)
  */
 
 ostream & operator<<(ostream & out, Player p)
-{ 
+{
+	out << "\n";
 	p.addChain<Quartz>();
-	p[0];
+	p.addToChain(new Quartz());
+	p.addToChain(new Quartz());
+
+	p.addToChain(new Quartz());
+
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
-	//for (int i = 0; i < p.getNumChains(); i++) 
-	out << p[0].getType() << '\t';
-			if (p[0].getSize() > 0) {
-				out<< p[0].getType().at(0) * p[0].getSize();
-			}
-		
+	for (int i = 0; i < p.getNumChains(); i++)
+		out << p[i] << "\n";
 	return out;
 }
 
