@@ -104,17 +104,17 @@ bool Player::addChain() {
 
 bool Player::addToChain(Card * card)
 {
-	if (chains.size() < maxNumChains) {
-		addChain(card->getName()[0]);
-		chains.back() += card;
-		return true;
-	}
-	//else
 	for (int i = 0; i < chains.size(); i++) {
 		if ((*this)[i].legal(card)) {
 			(*this)[i] += card;
 			return true;
 		}
+	}
+	//else
+	if (chains.size() < maxNumChains) {
+		addChain(card->getName()[0]);
+		chains.back() += card;
+		return true;
 	}
 	//else
 	return false;
