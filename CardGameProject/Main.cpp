@@ -74,68 +74,96 @@ static void pickUpFromTradingArea(Table* table, Player player, bool discard) {
 }
 
 
+
+static void save(Table&table) {
+	ofstream outputFile("lastGameSaved.txt");
+	if (outputFile) {
+		table.players[0].print(outputFile);
+		table.players[1].print(outputFile);
+		(*table.discard).print(outputFile);
+		outputFile << "\n" << *table.ta;
+		outputFile << "\n" << *table.deck << endl;
+		outputFile << "LE TOUR A QUI";
+		outputFile.close();
+	}
+}
+
+static Table* load() {
+	CardFactory *cf = CardFactory::getFactory();
+	ifstream inputFile("lastGameSaved.txt");
+	if (inputFile.is_open()) {
+		Table* table = new Table(inputFile, cf);
+		return table;
+	}
+	else
+		return NULL;
+
+}
+
 int main() {
 	//Setup
 	char answer;
 	bool pause = false;
-	Table* table;
-	cout << "Entrez n pour commencer un nouveau jeu, ou s pour reprendre un jeu sauvegarde. ";
-	cin >> answer;
-	if (answer == 'n') {
-		cin.ignore(256, '\n'); //empty cin for next input
-		string name1, name2;
-		cout << "Entrez le nom du premier joueur: ";
-		getline(cin, name1, '\n');
-		cin.clear();
-		cout << "Entrez le nom du deuxieme joueur: ";
-		getline(cin, name2);
+	Table* table = NULL;
 
-		table = new Table(name1, name2);
+	while (table == NULL) {
+		cout << "Entrez n pour commencer un nouveau jeu, ou s pour reprendre votre derniere partie. ";
+		cin >> answer;
+		if (answer == 'n') {
+			cin.ignore(256, '\n'); //empty cin for next input
+			string name1, name2;
+			cout << "Entrez le nom du premier joueur: ";
+			getline(cin, name1, '\n');
+			cin.clear();
+			cout << "Entrez le nom du deuxieme joueur: ";
+			getline(cin, name2);
 
-		for (Player player : table->players) {
-			for (int i = 0; i < 5; i++){
-				player += table->deck.draw();
+			table = new Table(name1, name2);
+
+			for (Player player : table->players) {
+				for (int i = 0; i < 5; i++) {
+					player += table->deck->draw();
+				}
 			}
 		}
-	}
-	else {
-		//load old game
-		string name1 = "ISA";
-		string name2 = "PAUL";
-		table = new Table(name1,name2);
+		else {
+			//load old game
+			string name1 = "Paul";
+			string name2 = "Isa ";
+			//table = new Table(name1, name2);
+			table = load();
+			if (table == NULL)
+				cout << "Aucune partie sauvegarder" <<endl<<endl;
+		}
 	}
 	
+	table->print();			//for testing purpose
+
 
 	///////////////////////////////this is all testing stuff
 	CardFactory *cf = CardFactory::getFactory();
-	cout << table->deck << endl<<endl;
-	table->players[0] += table->deck.draw();
-	table->players[0] += table->deck.draw();
-	table->players[0] += table->deck.draw();
-	table->players[0] += table->deck.draw();
-	cout << table->deck << endl << endl;
-	table->players[1] += table->deck.draw();
-	table->players[1] += table->deck.draw();
-	table->players[1] += table->deck.draw();
-	table->players[1] += table->deck.draw();
-	cout << table->deck << endl << endl;
+	table->players[0] += table->deck->draw();
+	table->players[0] += table->deck->draw();
+	table->players[0] += table->deck->draw();
+	table->players[0] += table->deck->draw();
+	table->players[1] += table->deck->draw();
+	table->players[1] += table->deck->draw();
+	table->players[1] += table->deck->draw();
+	table->players[1] += table->deck->draw();
 
-	table->print();			//for testing purpose
 
 	(*table->ta) += (table->players[0]).getHand()->play();
 	(*table->discard) += (table->players[1]).getHand()->play();
 
-
-	cout << "after discarding" << endl << endl;
-	//table->print();			//for testing purpose
-	table->print();			//for testing purpose
-	table->print();			//for testing purpose
 	table->print();			//for testing purpose
 
 
-	
+	save(*table);
+	//remove("lastGameSaved.txt"); //if game is over
 
-	while (!table->deck.empty()) {
+
+	//deck is now a pointer in TABLE CAREFULL
+	while (!table->deck->empty()) {
 		cout << "Voullez-vous pauser la game? (y/n)";
 		cin >> answer;
 		if (answer == 'y')
@@ -149,7 +177,7 @@ int main() {
 			for (Player player : table->players) {
 				//Display table
 				cout << table << "\n";
-				player += table->deck.draw();
+				player += table->deck->draw();
 
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
@@ -200,7 +228,7 @@ int main() {
 
 					//Étape 5
 					for (int i = 0; i < 3; i++) {
-						(*table->ta) += table->deck.draw();
+						(*table->ta) += table->deck->draw();
 					}
 					while (table->ta->legal(table->discard->top())) {
 						(*table->ta) += table->discard->pickUp();
@@ -209,12 +237,11 @@ int main() {
 					//Fin Étape 5
 
 					//Étape 6
-					player += table->deck.draw();
-					player += table->deck.draw();
+					player += table->deck->draw();
+					player += table->deck->draw();
 				}
 
 			}
-
 
 
 
@@ -223,3 +250,5 @@ int main() {
 			return 0;
 		}
 	}
+
+

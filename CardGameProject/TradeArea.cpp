@@ -84,16 +84,30 @@ int TradeArea::numCards()
 
 TradeArea::TradeArea(istream & in, CardFactory *cf)
 {
-	char cardType[150];
-	char dummy[150];
-	in.getline(dummy, 150); //line title in the file
-	in.getline(cardType, 150);
-	int i = 0;
-	while (cardType[i] == NULL) {
-		Card* cardToAdd = ((*cf).getCard(cardType[i]));
-		(*this) += cardToAdd;										
-		i++;
+	cards = new list<Card*>;
+	cardTypes = list<string>();
+	char cardType[256];
+	in.getline(cardType, 256);
+	int cnt = 0;
+	while (cardType[cnt] != NULL) {
+		cnt++;
 	}
+	cnt--;
+	for (int i = cnt ; i >= 0; i--) {
+			Card* cardToAdd = ((*cf).getCard(cardType[i]));
+			(*this) += cardToAdd;
+		}
+
+	/*
+	while (cardType[i] == NULL && i>=0) {
+		cout << i;
+		while (cardType[i] != NULL) {
+			Card* cardToAdd = ((*cf).getCard(cardType[i]));
+			(*this) += cardToAdd;
+			i--;
+		}
+		i--;
+	}*/
 
 }
 

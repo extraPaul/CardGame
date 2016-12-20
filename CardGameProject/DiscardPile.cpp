@@ -42,6 +42,7 @@ bool DiscardPile::isEmpty()
 	return false;
 }
 
+
 /*
 Text File Format:
 Line 1: Char for each card in discard
@@ -60,18 +61,21 @@ void DiscardPile::print(ostream & out)				//print all cards
 
 DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const adapt method otherwise
 {
-	char cardType[150];
-	char dummy[50];
-	in.getline(dummy, 256);//line title in the file
+	char cardType[256];
 	in.getline(cardType, 256);
-	int i = 0;
-	while (cardType[i] == NULL) {
+	int cnt = 0;
+	while (cardType[cnt] != NULL) {
+		cnt++;
+	}
+	cnt--;
+	for (int i = cnt ; i >= 0; i--) {
 		Card* cardToAdd = ((*cf).getCard(cardType[i]));
-		(*this).push_back(cardToAdd);										//check if right order
-		i++;
+		(*this).push_back(cardToAdd);
 	}
 
 }
+
+
 
 
 
@@ -83,3 +87,4 @@ ostream & operator<<(ostream & out, DiscardPile dp)
 	
 	return out;
 }
+

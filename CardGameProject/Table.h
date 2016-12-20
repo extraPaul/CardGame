@@ -3,11 +3,13 @@
 #include "DiscardPile.h"
 #include "TradeArea.h"
 #include "CardFactory.h"
+#include <iostream>
+#include <fstream>
 
 class Table {
 public:
 	vector<Player> players;
-	Deck deck;
+	Deck *deck;
 	DiscardPile *discard;
 	TradeArea *ta;
 
@@ -18,7 +20,6 @@ public:
 	void printHand(bool);
 	friend ostream & operator << (ostream &, Table);
 	Table(istream&, CardFactory*);
-
 
 	void print(void);		//for testing purpose
 };

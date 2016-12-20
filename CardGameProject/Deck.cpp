@@ -1,8 +1,12 @@
 #include "Deck.h"
 
-Deck::Deck(const istream &stream, CardFactory *cf)
+Deck::Deck(istream &in, CardFactory *cf)
 {
+	cf->setDeck(in);
+
 	*this = (*cf).getDeck();
+
+	
 }
 
 Card * Deck::draw()

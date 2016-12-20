@@ -73,15 +73,21 @@ void Player::printHand(ostream& out, bool notTopCard) {
 
 Player:: Player(istream& in, CardFactory* cf) {
 	getline(in,name, '\t');
+
 	in >> numCoins;
-	char dummy[150];
-	in.getline(dummy, 150); //word coins
-	while (in.peek() != '\t') {
-		//add chain here 
-		//chains.push_back(new Chain<Card>(in, cf));
-	}
+	in >> maxNumChains;
+	hand = new Hand(in, cf);
+	string dummy;
+	getline(in, dummy);
+	getline(in, dummy);
+	getline(in, dummy);
+
+	//add chain here 
+	//chains.push_back(new Chain<Card>(in, cf));
+	
 
 }
+
 
 template<class T>
 bool Player::addChain() {
@@ -165,4 +171,15 @@ ostream & operator<<(ostream & out, Player p)
 	//	out << p[i] << '\n';
 	out << '\t';
 	return out;
+}
+
+void Player::print(ostream & out)				//print all cards
+{
+	out << getName() << '\t' << getNumCoins() << ' ' << getMaxNumChains() << "\n";
+	out << *hand << "\n";
+	for (int i = 0; i < 3; i++){
+		//	out << p[i] << '\n';
+		out << "NULL" << "\n";
+	}
+		
 }

@@ -10,7 +10,7 @@ class Deck : public vector<Card*> {
 public:
 	// default constructor
 	Deck() = default;
-	Deck(const istream&, CardFactory*);
+	Deck(istream&, CardFactory*);
 	Deck(CardFactory*);
 	Card* draw();
 	friend ostream & operator << (ostream &, Deck);
