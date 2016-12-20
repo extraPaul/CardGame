@@ -133,5 +133,11 @@ ostream & operator<<(ostream & sortie, Chain<T> c)
 		sortie << " ";
 		(*it)->print(sortie);
 	}
+	sortie << "\n";
 	return sortie;
+}
+
+
+
 }*/
+
