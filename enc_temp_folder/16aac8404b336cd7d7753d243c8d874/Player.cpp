@@ -177,10 +177,7 @@ ostream & operator<<(ostream & out, Player p)
 	p[0];
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	//for (int i = 0; i < p.getNumChains(); i++) 
-	out << p[0].getType() << '\t';
-			if (p[0].getSize() > 0) {
-				out<< p[0].getType().at(0) * p[0].getSize();
-			}
+		out << p[0].getType() << '\t' << p[0].getType().at(0) * p[0].getSize();
 		
 	return out;
 }
