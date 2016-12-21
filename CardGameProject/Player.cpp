@@ -77,10 +77,23 @@ Player:: Player(istream& in, CardFactory* cf) {
 	in >> numCoins;
 	in >> maxNumChains;
 	hand = new Hand(in, cf);
-	string dummy;
-	getline(in, dummy);
-	getline(in, dummy);
-	getline(in, dummy);
+	char type;
+	int size;
+	string chainInfo;
+	string tmp;
+	for (int i = 0; i < 3; i++) {
+		getline(in, chainInfo);
+		if (chainInfo.compare("NULL") != 0) {
+			type = chainInfo.at(0);
+			size = atoi(chainInfo.substr(2).c_str());
+			addChain(type);
+			for (int i = 0; i < size; i++) {
+				addToChain(cf->getCard(type));
+			}
+
+		}
+
+	}
 
 	//add chain here 
 	//chains.push_back(new Chain<Card>(in, cf));
@@ -182,12 +195,14 @@ ostream & operator<<(ostream & out, Player p)
 }
 
 void Player::print(ostream & out)				//print all cards
-{
+{	
+	//addChain<Quartz>();
+	//addToChain(new Quartz());
 	out << getName() << '\t' << getNumCoins() << ' ' << getMaxNumChains() << "\n";
 	out << *hand << "\n";
 	for (int i = 0; i < 3; i++){
-		if(i<getNumChains())
-			out << chains[i]<< '\n';
+		if (i < getNumChains())
+			out << chains[i].getType().at(0) << " " << chains[i].getSize() << "\n";
 		else
 			out << "NULL" << "\n";
 	}

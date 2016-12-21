@@ -167,7 +167,7 @@ int main() {
 			pause = true;
 		if (pause) {
 			//Save game to file and exit
-
+			save(*table);
 			return 0;
 		}
 		else {

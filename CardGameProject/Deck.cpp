@@ -2,9 +2,7 @@
 
 Deck::Deck(istream &in, CardFactory *cf)
 {
-	cf->setDeck(in);
-
-	*this = (*cf).getDeck();
+	*this = ( cf->setDeck(in) );
 
 	
 }
