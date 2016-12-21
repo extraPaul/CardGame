@@ -69,7 +69,7 @@ ostream & operator<<(ostream & out, Table t)
 	
 	return out;
 }
-
+/*
 
 //for testing only
 void Table::print() {
@@ -82,6 +82,6 @@ void Table::print() {
 		cout << "Top of discard pile:\n" << *discard << "\n" << "Trading area:\n" << *ta;
 		//cout << endl<< "Deck:\n" << *deck << endl;
 
-}
+}*/
 
 

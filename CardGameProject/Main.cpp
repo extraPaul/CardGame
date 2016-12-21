@@ -22,7 +22,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 	}
 	if (askExchange) {
 		if (optional) {
-			cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
+			cout << "Voulez-vous echanger une de vos chaine? (y/n) ";
 			cin >> answer;
 		}
 		else {
@@ -32,7 +32,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 			ret = true;
 			int choix = 0;
 			while (!choix) {
-				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
+				cout << "Quel chaine voulez-vous echanger?\n(Entrez le numero de la chaine, en commencant a 1)";
 				cin >> choix;
 				if (!(0 < choix && choix <= player.getNumChains())) {
 					cout << "Position invalide, essayez de nouveau. "; 
@@ -55,6 +55,7 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	for (int j = 0; j < table->ta->cardTypes.size(); j++) {
 		string type = table->ta->getCardType(j);
 		cout << *table << "\n";
+
 		//TODO Une carte à la foix ou tous enssemble?
 		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 		cin >> answer;
@@ -149,26 +150,7 @@ int main() {
 		}
 	}
 	
-	/*table->print();			//for testing purpose
 
-	///////////////////////////////this is all testing stuff
-	CardFactory *cf = CardFactory::getFactory();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	(*table->ta) += (table->players[0]).getHand()->play();
-	(*table->discard) += (table->players[1]).getHand()->play();
-	(table->players[1]).addToChain(new Quartz());
-
-	table->print();			//for testing purpose
-
-	save(*table);
-	//remove("lastGameSaved.txt"); //if game is over*/
 
 
 	//deck is now a pointer in TABLE CAREFULL
@@ -185,7 +167,7 @@ int main() {
 		}
 		else {
 			for (Player& player : table->players) {
-				cout << "--------------------------\nC'est le tour a " << player.getName() << endl;
+				cout << "--------------------------\nC'est le tour a " << player.getName() << endl << endl;
 				//Display table
 				cout << *table << "\n";
 				player += table->deck->draw();
@@ -193,6 +175,7 @@ int main() {
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
 				}//done with Trade Area (Étape 1)
+
 				//Étape 2
 				cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
 				bool keepPlaying = true;
@@ -242,8 +225,8 @@ int main() {
 									choix = 0;
 								}
 							}
-							//choix--;
-							(*table->discard) += (*player.getHand())[choix];
+							choix = (*player.getHand()).size() - choix;     ///fixed the choice to reverse 
+							(*table->discard) += (*player.getHand())[choix];    //i think card insnt removed from hand??
 						}
 					} //Fin Étape 4
 
@@ -266,11 +249,13 @@ int main() {
 
 
 
-			cout << endl << endl;
-			system("pause");
-			return 0;
+			
 		}
 	cout << "Le gagnant est " << winner << "!\n";
+	remove("lastGameSaved.txt"); //game is over*/
+	cout << endl << endl;
+	system("pause");
+	return 0;
 }
 
 
