@@ -120,6 +120,7 @@ string TradeArea::getCardType(int i)
 	list<string>::iterator it = cardTypes.begin();
 	while (i > 0 && it != cardTypes.end()) {
 		it++;
+		i--;
 	}
 	return *it;
 }
