@@ -241,7 +241,7 @@ int main() {
 									choix = 0;
 								}
 							}
-							choix--;
+							//choix--;
 							(*table->discard) += (*player.getHand())[choix];
 						}
 					} //Fin Étape 4
