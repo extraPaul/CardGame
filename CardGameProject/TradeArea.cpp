@@ -65,6 +65,8 @@ bool TradeArea::empty()
 
 Card * TradeArea::trade(string name)
 {
+	if (empty())
+		return nullptr;
 	list<Card*>::iterator it = cards->begin();
 	while (it != cards->end()) {
 		if (name.compare((**it).getName()) == 0) {

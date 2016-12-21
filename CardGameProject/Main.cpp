@@ -224,7 +224,7 @@ int main() {
 									choix = 0;
 								}
 							}
-							choix = (*player.getHand()).size() - choix;     ///fixed the choice to reverse 
+							//choix = (*player.getHand()).size() - choix;     ///fixed the choice to reverse 
 							(*table->discard) += (*player.getHand())[choix];    //i think card insnt removed from hand??
 						}
 					} //Fin Étape 4
