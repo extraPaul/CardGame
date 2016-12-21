@@ -10,6 +10,7 @@ public:
 			return coins + 3;
 		else if (coins == 1)
 			return 3;
+		return 0;
 	}
 
 	string getName() {

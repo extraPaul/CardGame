@@ -17,4 +17,5 @@ public:
 	TradeArea(istream&, CardFactory* );
 	list<Card*>* cards;
 	list<string> cardTypes;
+	string getCardType(int);
 };

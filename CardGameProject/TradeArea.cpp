@@ -16,10 +16,10 @@ InputIterator findName(InputIterator first, InputIterator last, const T& val)
 	return last;
 }
 
-template <typename Container>
-bool containsName(Container const& c, typename Container::const_reference v) {
-	list<Card*>::iterator first = c.begin();
-	list<Card*>::iterator last = c.end();
+
+bool containsName(list<Card*> const& c, string& v) {
+	list<Card*>::const_iterator first = c.begin();
+	list<Card*>::const_iterator last = c.end();
 	while (first != last) {
 		if ((*first)->getName().compare(v) == 0) return true;
 		++first;
@@ -67,11 +67,14 @@ Card * TradeArea::trade(string name)
 {
 	list<Card*>::iterator it = cards->begin();
 	while (it != cards->end()) {
-		if (name.compare((*(*it)).getName()) == 0) {
+		if (name.compare((**it).getName()) == 0) {
 			Card* temp = *it;
 			cards->erase(it);
+			if (!containsName(*cards, name))
+				cardTypes.remove(name);
 			return temp;
 		}
+		it++;
 	}
 	//If there is no card of that type:
 	return nullptr;
@@ -109,6 +112,16 @@ TradeArea::TradeArea(istream & in, CardFactory *cf)
 		i--;
 	}*/
 
+}
+
+string TradeArea::getCardType(int i)
+{
+	//if i < 0 return first, and if i > size return last.
+	list<string>::iterator it = cardTypes.begin();
+	while (i > 0 && it != cardTypes.end()) {
+
+	}
+	return string();
 }
 
 /*
