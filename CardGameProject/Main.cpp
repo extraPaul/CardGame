@@ -32,7 +32,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 			ret = true;
 			int choix = 0;
 			while (!choix) {
-				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
+				cout << "Quel chaine voulez-vous echanger?\n(Entrez le numero de la chaine, en commencant a 1)";
 				cin >> choix;
 				if (!(0 < choix && choix <= player.getNumChains())) {
 					cout << "Position invalide, essayez de nouveau. "; 
@@ -166,7 +166,7 @@ int main() {
 		}
 		else {
 			for (Player& player : table->players) {
-				cout << "--------------------------\nC'est le tour a " << player.getName() << endl;
+				cout << "--------------------------\nC'est le tour a " << player.getName() << endl << endl;
 				//Display table
 				cout << *table << "\n";
 				player += table->deck->draw();
@@ -174,6 +174,7 @@ int main() {
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
 				}//done with Trade Area (Étape 1)
+
 				//Étape 2
 				cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
 				bool keepPlaying = true;
@@ -223,7 +224,8 @@ int main() {
 									choix = 0;
 								}
 							}
-							(*table->discard) += (*player.getHand())[choix];
+							choix = (*player.getHand()).size() - choix;     ///fixed the choice to reverse 
+							(*table->discard) += (*player.getHand())[choix];    //i think card insnt removed from hand??
 						}
 					} //Fin Étape 4
 

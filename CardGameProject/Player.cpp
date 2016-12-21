@@ -188,8 +188,6 @@ void Player::addChain(char type)
 
 ostream & operator<<(ostream & out, Player p)
 {
-	out << "\n";
-
 	out << p.getName() << '\t' << p.getNumCoins() << " coins\n";
 	for (int i = 0; i < p.getNumChains(); i++)
 		out << p[i] << "\n";

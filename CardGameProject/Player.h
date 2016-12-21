@@ -130,7 +130,7 @@ class NotEnoughCoins : public exception
 {
 	virtual const char* what() const throw()
 	{
-		return "Not enough coins to buy a thirs chain";
+		return "Not enough coins to buy a third chain";
 	}
 
 	friend ostream & operator << (ostream & out, NotEnoughCoins e) {
