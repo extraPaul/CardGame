@@ -119,9 +119,9 @@ string TradeArea::getCardType(int i)
 	//if i < 0 return first, and if i > size return last.
 	list<string>::iterator it = cardTypes.begin();
 	while (i > 0 && it != cardTypes.end()) {
-
+		it++;
 	}
-	return string();
+	return *it;
 }
 
 /*

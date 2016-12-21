@@ -53,7 +53,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	char answer;
 	for (int j = 0; j < table->ta->cardTypes.size(); j++) {
-		//string type = table->ta->cardTypes
+		string type = table->ta->getCardType(j);
 		cout << *table << "\n";
 		//TODO Une carte à la foix ou tous enssemble?
 		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
@@ -79,6 +79,8 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				temp = table->ta->trade(type);
 			}
 		}
+		if (type.compare(table->ta->getCardType(j)) != 0)
+			j--;
 	}
 }
 
