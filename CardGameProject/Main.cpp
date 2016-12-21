@@ -22,7 +22,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 	}
 	if (askExchange) {
 		if (optional) {
-			cout << "Voulez-vous échanger une de vos chaine? (y/n) ";
+			cout << "Voulez-vous echanger une de vos chaine? (y/n) ";
 			cin >> answer;
 		}
 		else {
@@ -55,6 +55,7 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	for (int j = 0; j < table->ta->cardTypes.size(); j++) {
 		string type = table->ta->getCardType(j);
 		cout << *table << "\n";
+
 		//TODO Une carte à la foix ou tous enssemble?
 		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 		cin >> answer;
@@ -148,26 +149,7 @@ int main() {
 		}
 	}
 	
-	/*table->print();			//for testing purpose
 
-	///////////////////////////////this is all testing stuff
-	CardFactory *cf = CardFactory::getFactory();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[0] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	table->players[1] += table->deck->draw();
-	(*table->ta) += (table->players[0]).getHand()->play();
-	(*table->discard) += (table->players[1]).getHand()->play();
-	(table->players[1]).addToChain(new Quartz());
-
-	table->print();			//for testing purpose
-
-	save(*table);
-	//remove("lastGameSaved.txt"); //if game is over*/
 
 
 	//deck is now a pointer in TABLE CAREFULL
@@ -241,7 +223,6 @@ int main() {
 									choix = 0;
 								}
 							}
-							//choix--;
 							(*table->discard) += (*player.getHand())[choix];
 						}
 					} //Fin Étape 4
@@ -265,11 +246,13 @@ int main() {
 
 
 
-			cout << endl << endl;
-			system("pause");
-			return 0;
+			
 		}
 	cout << "Le gagnant est " << winner << "!\n";
+	remove("lastGameSaved.txt"); //game is over*/
+	cout << endl << endl;
+	system("pause");
+	return 0;
 }
 
 
