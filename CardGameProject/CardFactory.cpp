@@ -52,7 +52,7 @@ CardFactory * CardFactory::getFactory()
 	return &cf;
 }
 
-void CardFactory::setDeck(istream &in)
+Deck CardFactory::setDeck(istream &in)
 {
 	deck = new Deck();
 	char cardType[256];
@@ -63,6 +63,8 @@ void CardFactory::setDeck(istream &in)
 		deck->push_back(cardToAdd);										//check if right order
 		i++;
 	}
+
+	return *deck;
 
 }
 

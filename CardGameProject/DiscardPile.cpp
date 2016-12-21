@@ -55,8 +55,8 @@ void DiscardPile::print(ostream & out)				//print all cards
 			out << (**it);
 		}
 	}
-	else
-		out << "Discard pile is empty";
+	/*else
+		out << "Discard pile is empty";*/
 }
 
 DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const adapt method otherwise
