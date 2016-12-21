@@ -80,8 +80,9 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				temp = table->ta->trade(type);
 			}
 		}
-		if (type.compare(table->ta->getCardType(j)) != 0)
-			j--;
+		if (!(j > table->ta->cardTypes.size()))
+			if(type.compare(table->ta->getCardType(j)) != 0)
+				j--;
 	}
 }
 
