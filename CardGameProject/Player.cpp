@@ -117,6 +117,8 @@ bool Player::addChain() {
 
 bool Player::addToChain(Card * card)
 {
+	if (card == nullptr)
+		return false;
 	for (int i = 0; i < chains.size(); i++) {
 		if ((*this)[i].legal(card)) {
 			(*this)[i] += card;

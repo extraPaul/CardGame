@@ -1,7 +1,8 @@
 #include "Table.h"
 
 
-static void BuyOrSellChain(Player player, bool optional) {
+static bool BuyOrSellChain(Player player, bool optional) {
+	bool ret = false;
 	bool askExchange = true;
 	char answer;
 	if (player.getMaxNumChains() < 3) {
@@ -12,6 +13,7 @@ static void BuyOrSellChain(Player player, bool optional) {
 				player.buyThirdChain();
 				//The following is skipped if exception is thrown.
 				askExchange = false;
+				ret = true;
 			}
 			catch (NotEnoughCoins e) {
 				cout << e << "\n";
@@ -27,6 +29,7 @@ static void BuyOrSellChain(Player player, bool optional) {
 			cout << "Vous devez vendre une chaine et la remplacer.\n";
 		}
 		if (answer == 'y' || !optional) {
+			ret = true;
 			int choix = 0;
 			while (!choix) {
 				cout << "Quel chaine voulez-vous échanger?\n(Entrez le numéro de la chaine, en commensant à 1)";
@@ -41,25 +44,31 @@ static void BuyOrSellChain(Player player, bool optional) {
 			//goes back in the loop and adds the card.
 		}
 	}
+
+	return ret;
 }
 
 
 
-static void pickUpFromTradingArea(Table* table, Player player, bool discard) {
+static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	char answer;
-	for (string type : table->ta->cardTypes) {
+	for (int j = 0; j < table->ta->cardTypes.size(); j++) {
+		//string type = table->ta->cardTypes
+		cout << *table << "\n";
 		//TODO Une carte à la foix ou tous enssemble?
 		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 		cin >> answer;
 		if (answer == 'y') {
 			Card* temp = table->ta->trade(type);
-			while (temp) {
+			while (temp != nullptr) {
 				//Add to correct chain.
 				if (player.addToChain(temp)) {
 					temp = table->ta->trade(type);
 				}
 				else {
-					BuyOrSellChain(player, true);
+					bool cont = BuyOrSellChain(player, true);
+					if (!cont)
+						temp = nullptr;
 				}
 			}
 		}	//else add them to discard.
@@ -160,8 +169,9 @@ int main() {
 
 
 	//deck is now a pointer in TABLE CAREFULL
-	while (!table->deck->empty()) {
-		cout << "Voulez-vous mettre la partie en pause? (y/n)";
+	string winner;
+	while (!table->win(winner)) {
+		cout << "Voulez-vous mettre la partie en pause? (y/n) ";
 		cin >> answer;
 		if (answer == 'y')
 			pause = true;
@@ -171,7 +181,8 @@ int main() {
 			return 0;
 		}
 		else {
-			for (Player player : table->players) {
+			for (Player& player : table->players) {
+				cout << "--------------------------\nC'est le tour a " << player.getName() << endl;
 				//Display table
 				cout << *table << "\n";
 				player += table->deck->draw();
@@ -188,12 +199,14 @@ int main() {
 						for (int i = 0; i < player.getNumChains(); i++) {
 							if (player[i].sell() > 0) {
 								cout << "Vous avez vendu une chaine!\n";
-								//TODO print chains?
+								cout << *table << "\n";
 								player.sellChain(i);
 							}
 						}
 						if (0 < player.getHand()->size()) {
-							cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n)";
+							cout << player << endl;
+							cout << "Votre main: " << *player.getHand() << endl;
+							cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
 							cin >> answer;
 							if (answer == 'n')
 								keepPlaying = false;
@@ -206,8 +219,9 @@ int main() {
 
 					//Étape 4
 					if (0 < player.getHand()->size()) {
+						cout << player << endl;
 						cout << "Votre main: " << *player.getHand() << "\n";
-						cout << "Voulez-vous vous debarasser d'une carte? (y/n)";
+						cout << "Voulez-vous vous debarasser d'une carte? (y/n) ";
 
 						cin >> answer;
 						if (answer == 'y') {
@@ -234,7 +248,7 @@ int main() {
 					for (int i = 0; i < 3; i++) {
 						(*table->ta) += table->deck->draw();
 					}
-					while (table->ta->legal(table->discard->top())) {
+					while (!(table->discard->isEmpty()) && table->ta->legal(table->discard->top())) {
 						(*table->ta) += table->discard->pickUp();
 					}
 					pickUpFromTradingArea(table, player, false);
@@ -253,6 +267,7 @@ int main() {
 			system("pause");
 			return 0;
 		}
-	}
+	cout << "Le gagnant est " << winner << "!\n";
+}
 
 

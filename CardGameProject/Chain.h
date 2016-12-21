@@ -93,13 +93,13 @@ Chain<T>& Chain<T>::operator+=(Card *card)
 template<class T>
 int Chain<T>::sell()
 {
-	int coins;
-	for (coins = 4; coins < 0; coins--) {
-		if (this->size() == (*this)[0]->getCardsPerCoin(coins))
-			break;
+	T temp;
+	for (int cns = 4; cns < 0; cns--) {
+		if (this->getSize() == temp.getCardsPerCoin(cns))
+			return cns;
 	}
 
-	return coins;
+	return 0;
 }
 
 template<class T>

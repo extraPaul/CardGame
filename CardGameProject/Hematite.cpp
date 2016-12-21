@@ -21,6 +21,7 @@ public:
 			break;
 		default:
 			//throw exception?
+			return 0;
 			break;
 		}
 	}

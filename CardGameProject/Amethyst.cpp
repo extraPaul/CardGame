@@ -8,6 +8,7 @@ public:
 	int getCardsPerCoin(int coins) {
 		if (0 < coins && coins < 5)
 			return coins + 1;
+		return 0;
 	}
 
 	string getName() {
