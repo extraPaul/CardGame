@@ -41,6 +41,7 @@ static bool BuyOrSellChain(Player player, bool optional) {
 			}
 			choix--;
 			player.sellChain(choix);
+			cout <<"apres sell chain dans buy or sell /n/n" <<endl;
 			//goes back in the loop and adds the card.
 		}
 	}
@@ -167,14 +168,19 @@ int main() {
 		}
 		else {
 			for (Player& player : table->players) {
-				cout << "--------------------------\nC'est le tour a " << player.getName() << endl << endl;
-				//Display table
-				cout << *table << "\n";
+				cout << "**********************\nC'est le tour a " << player.getName();
+				cout << "\n**********************\n" << endl;
+				
+				//Draw a card
 				player += table->deck->draw();
 
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
 				}//done with Trade Area (Étape 1)
+				else {
+					//Display table
+					cout << *table << "\n";
+				}
 
 				//Étape 2
 				cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
@@ -187,6 +193,7 @@ int main() {
 								cout << "Vous avez vendu une chaine!\n";
 								cout << *table << "\n";
 								player.sellChain(i);
+								cout << "dans la boucle for comme si on vendait \n\n";
 							}
 						}
 						if (0 < player.getHand()->size()) {
@@ -199,7 +206,9 @@ int main() {
 						}
 					}
 					else {
-						BuyOrSellChain(player, false);
+						BuyOrSellChain(player, false); 
+						cout << "dans le else\n\n";
+
 					}
 				} //Fin Étape 2 et 3
 
@@ -225,14 +234,13 @@ int main() {
 									choix = 0;
 								}
 							}
-							//choix = (*player.getHand()).size() - choix;     ///fixed the choice to reverse 
-							(*table->discard) += (*player.getHand())[choix];    //i think card insnt removed from hand??
+							(*table->discard) += (*player.getHand())[choix];  
 						}
 					} //Fin Étape 4
 
 					//Étape 5
 					for (int i = 0; i < 3; i++) {
-						(*table->ta) += table->deck->draw();
+						(*table->ta) += table->deck->draw();    //Mettre 3 nouvelles cartes dans le TA
 					}
 					while (!(table->discard->isEmpty()) && table->ta->legal(table->discard->top())) {
 						(*table->ta) += table->discard->pickUp();

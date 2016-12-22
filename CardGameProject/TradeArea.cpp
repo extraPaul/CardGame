@@ -47,7 +47,7 @@ TradeArea & TradeArea::operator+=(Card *card)
 {
 	
 	(*cards).insert((*cards).begin(), card);
-	if (!contains(cardTypes, card->getName()))
+	if (!contains(cardTypes, card->getName()))								//test
 		cardTypes.emplace_front(card->getName());
 
 	return *this;
@@ -72,7 +72,7 @@ Card * TradeArea::trade(string name)
 		if (name.compare((**it).getName()) == 0) {
 			Card* temp = *it;
 			cards->erase(it);
-			if (!containsName(*cards, name))
+			if (containsName(*cards, name))						//test
 				cardTypes.remove(name);
 			return temp;
 		}
@@ -103,16 +103,7 @@ TradeArea::TradeArea(istream & in, CardFactory *cf)
 			(*this) += cardToAdd;
 		}
 
-	/*
-	while (cardType[i] == NULL && i>=0) {
-		cout << i;
-		while (cardType[i] != NULL) {
-			Card* cardToAdd = ((*cf).getCard(cardType[i]));
-			(*this) += cardToAdd;
-			i--;
-		}
-		i--;
-	}*/
+
 
 }
 
