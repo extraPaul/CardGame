@@ -4,7 +4,7 @@
 static bool BuyOrSellChain(Player& player, bool optional) {
 	bool ret = false;
 	bool askExchange = true;
-	char answer;
+	char answer = ' ';
 	if (player.getMaxNumChains() < 3) {
 		cout << "Voulez-vous acheter une nouvelle chaine? (y/n) ";
 		cin >> answer;
@@ -86,7 +86,7 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 			Card* temp = table->ta->trade(type);
 			while (temp) {
 				(*table->discard) += temp;
-				cout << "card bellow is discarded \n";
+				cout << endl<< type << "est placer dans la pile discard "<<endl<<endl;
 				temp = table->ta->trade(type);
 			}
 			j--;
@@ -185,6 +185,7 @@ int main() {
 
 				if (!table->ta->empty()) {
 					pickUpFromTradingArea(table, player, true);
+					cout << *table << "\n";
 				}//done with Trade Area (Étape 1)
 				else {
 					//Display table
@@ -200,8 +201,9 @@ int main() {
 						for (int i = 0; i < player.getNumChains(); i++) {
 							if (player[i].sell() > 0) {
 								cout << "Vous avez vendu une chaine!\n";
-								cout << *table << "\n";
 								player.sellChain(i);
+								cout << *table << "\n";
+
 							}
 						}
 
@@ -215,7 +217,7 @@ int main() {
 						keepPlaying = false;
 
 					if (0 < player.getHand()->size()) {
-						cout << player << endl;
+						cout << endl<< player << endl;
 						cout << "Votre main: " << *player.getHand() << endl;
 						cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
 						cin >> answer;
@@ -237,7 +239,7 @@ int main() {
 							for (int i = 1; i <= player.getHand()->size(); i++) {
 								cout << i;
 							}
-							cout << endl;
+							cout << endl <<endl;
 							int choix = 0;
 							while (!choix) {
 								cout << "De quel carte voulez-vous vous debarasser?\nEntrez la position de la carte : ";
