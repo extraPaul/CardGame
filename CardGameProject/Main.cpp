@@ -246,7 +246,7 @@ int main() {
 								cin >> answer;
 								choix = answer - '0';
 								if (!(0 < choix && choix <= player.getHand()->size())) {
-									cout << "Position invalide, essayez de nouveau. ";
+									cout << "Position invalide, essayez de nouveau. " <<endl;
 									choix = 0;
 								}
 							}
