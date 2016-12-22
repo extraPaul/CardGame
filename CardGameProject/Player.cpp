@@ -50,7 +50,7 @@ void Player:: buyThirdChain() {
 		throw NotEnoughCoins();
 	else {
 		numCoins = numCoins - 3;
-																//la troisieme chaine est elle dans le bon ordre
+																
 		maxNumChains++;
 	}
 
@@ -94,9 +94,6 @@ Player:: Player(istream& in, CardFactory* cf) {
 		}
 
 	}
-
-	//add chain here 
-	//chains.push_back(new Chain<Card>(in, cf));
 	
 
 }

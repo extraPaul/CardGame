@@ -47,7 +47,7 @@ TradeArea & TradeArea::operator+=(Card *card)
 {
 	
 	(*cards).insert((*cards).begin(), card);
-	if (!contains(cardTypes, card->getName())) {						//test
+	if (!contains(cardTypes, card->getName())) {						
 		cardTypes.emplace_front(card->getName());
 
 	}
@@ -74,7 +74,7 @@ Card * TradeArea::trade(string name)
 		if (name.compare((**it).getName()) == 0) {
 			Card* temp = *it;
 			cards->erase(it);
-			if (!containsName(*cards, name)) {					//test
+			if (!containsName(*cards, name)) {					
 				cardTypes.remove(name);
 			}
 			return temp;

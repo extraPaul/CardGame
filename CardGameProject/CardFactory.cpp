@@ -52,7 +52,7 @@ CardFactory * CardFactory::getFactory()
 	return &cf;
 }
 
-Deck CardFactory::setDeck(istream &in)
+Deck CardFactory::setDeck(istream &in)		//when a game is loaded
 {
 	deck = new Deck();
 	char cardType[256];
@@ -60,7 +60,7 @@ Deck CardFactory::setDeck(istream &in)
 	int i = 0;
 	while (cardType[i] != NULL) {
 		Card* cardToAdd = getCard(cardType[i]);
-		deck->push_back(cardToAdd);										//check if right order
+		deck->push_back(cardToAdd);									
 		i++;
 	}
 
@@ -78,7 +78,7 @@ Deck CardFactory::getDeck()
 }
 
 
-Card* CardFactory::getCard(char type) {
+Card* CardFactory::getCard(char type) {  //used when we create Deck
 	Card * newCard = NULL;
 
 	if (type == 'Q') {
