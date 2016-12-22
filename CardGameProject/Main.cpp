@@ -160,8 +160,8 @@ int main() {
 				cout << "Aucune partie sauvegarder" <<endl<<endl;
 		}
 	}
-	
-
+	for(int i = 0 ; i<90 ; i++)
+	table->deck->draw();
 
 
 	string winner;
@@ -256,7 +256,8 @@ int main() {
 
 					//Étape 5
 					for (int i = 0; i < 3; i++) {
-						(*table->ta) += table->deck->draw();    //Mettre 3 nouvelles cartes dans le TA
+						if (!table->deck->empty())
+							(*table->ta) += table->deck->draw();    //Mettre 3 nouvelles cartes dans le TA
 					}
 					while (!(table->discard->isEmpty()) && table->ta->legal(table->discard->top())) {
 						(*table->ta) += table->discard->pickUp();
