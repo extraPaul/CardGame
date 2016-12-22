@@ -27,12 +27,13 @@ static bool BuyOrSellChain(Player& player, bool optional) {
 		}
 		else {
 			cout << "Vous devez vendre une chaine et la remplacer.\n" << endl;
-			for(int i = 0 ; i< player.getNumChains(); i++)
-				cout << i+1 << " - " << player[i] <<endl;
+			
 		}
 		if (answer == 'y' || !optional) {
 			ret = true;
 			int choix = 0;
+			for (int i = 0; i< player.getNumChains(); i++)
+				cout << i + 1 << " - " << player[i] << endl;
 			while (!choix) {
 				cout << endl << "Quel chaine voulez-vous echanger?\nEntrez le numero de la chaine : ";
 				cin >> choix;
@@ -55,15 +56,14 @@ static bool BuyOrSellChain(Player& player, bool optional) {
 static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	char answer;
 	int j = 0;
-	//for (int j = 0; j < table->ta->cards->size(); j++) {
 
-	while(j<  table->ta->cards->size()){
+	while(j< table->ta->cardTypes.size()){
 		string type = table->ta->getCardType(j);
 
 		cout << *table << "\n";
 
 		//TODO Une carte à la foix ou tous ensemble?
-		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
+		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) " <<endl;
 		cin >> answer;
 		if (answer == 'y') {
 			Card* temp = table->ta->trade(type);
@@ -75,13 +75,12 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				else {
 					bool cont = BuyOrSellChain(player, true);
 					if (!cont) {
-						(*table->ta) += temp;
 						temp = nullptr;
+						j++;
 					}
-						
 				}
+				j--;
 			}
-			j--;
 		}	//else add them to discard.
 		else if(discard) {
 			Card* temp = table->ta->trade(type);
@@ -91,11 +90,11 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				temp = table->ta->trade(type);
 			}
 			j--;
+
 		}
 		j++;
-	/*	if (!(j > table->ta->cardTypes.size()))
-			if(type.compare(table->ta->getCardType(j)) != 0)
-				j--;*/
+
+
 	}
 }
 
@@ -204,7 +203,6 @@ int main() {
 								cout << "Vous avez vendu une chaine!\n";
 								cout << *table << "\n";
 								player.sellChain(i);
-								cout << "dans la boucle for comme si on vendait \n\n";
 							}
 						}
 

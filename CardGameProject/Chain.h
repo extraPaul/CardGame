@@ -94,9 +94,11 @@ template<class T>
 int Chain<T>::sell()
 {
 	T temp;
-	for (int cns = 4; cns < 0; cns--) {
-		if (this->getSize() == temp.getCardsPerCoin(cns))
+	for (int cns = 4; cns > 0; cns--) {
+		if (this->getSize() == temp.getCardsPerCoin(cns)) {
 			return cns;
+
+		}
 	}
 
 	return 0;

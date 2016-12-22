@@ -61,7 +61,6 @@ public:
 	};
 
 	int size() { 
-		//cout << "n dans size : " << n << endl;
 		return n; 
 	};
 
@@ -79,8 +78,6 @@ public:
 	};
 
 	bool removeChain(int i) {
-		cout << "n : " << n <<endl;
-		cout << "i : " << i <<endl;
 
 		if (0 <= i && i < n) {
 			if (i == 0) {
