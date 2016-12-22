@@ -61,7 +61,6 @@ public:
 	};
 
 	int size() { 
-		//cout << "n dans size : " << n << endl;
 		return n; 
 	};
 

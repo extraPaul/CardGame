@@ -117,6 +117,7 @@ string TradeArea::getCardType(int i)
 	while (i > 0 && it != cardTypes.end()) {
 		it++;
 		i--;
+		
 	}
 	return *it;
 }

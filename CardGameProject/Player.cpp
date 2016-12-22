@@ -136,9 +136,7 @@ bool Player::addToChain(Card * card)
 }
 
 void Player::sellChain(int i){
-	cout << "numcoins avant " << numCoins << endl;
 	numCoins += chains[i].sell();
-	cout << "numcoins apres " << numCoins << endl;
 	chains.removeChain(i);
 }
 
