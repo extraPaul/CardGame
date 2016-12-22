@@ -17,9 +17,7 @@ public:
 	Table(string& name1, string& name2);
 	~Table();
 	bool win(string&);
-	void printHand(bool);
 	friend ostream & operator << (ostream &, Table);
 	Table(istream&, CardFactory*);
 
-	void print(void);		//for testing purpose
 };

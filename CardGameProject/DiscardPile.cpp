@@ -77,8 +77,6 @@ DiscardPile::DiscardPile(istream & in, CardFactory *cf)		//deleted the const ada
 
 
 
-
-
 ostream & operator<<(ostream & out, DiscardPile dp)
 {
 	if (!dp.isEmpty()) {

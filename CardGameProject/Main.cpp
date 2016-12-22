@@ -79,8 +79,9 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 						j++;
 					}
 				}
-				j--;
+				
 			}
+			j--;
 		}	//else add them to discard.
 		else if(discard) {
 			Card* temp = table->ta->trade(type);
