@@ -86,9 +86,9 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 			Card* temp = table->ta->trade(type);
 			while (temp) {
 				(*table->discard) += temp;
+				cout << endl<< type << "est placer dans la pile discard "<<endl<<endl;
 				temp = table->ta->trade(type);
 			}
-			cout << endl << type << "est placer dans la pile discard " << endl;
 			j--;
 
 		}
