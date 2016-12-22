@@ -74,8 +74,11 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				}
 				else {
 					bool cont = BuyOrSellChain(player, true);
-					if (!cont)
+					if (!cont) {
+						(*table->ta) += temp;
 						temp = nullptr;
+					}
+						
 				}
 			}
 			j--;
@@ -187,6 +190,7 @@ int main() {
 				else {
 					//Display table
 					cout << *table << "\n";
+					cout << "Votre main: " << *player.getHand() << endl;
 				}
 
 				//Étape 2
