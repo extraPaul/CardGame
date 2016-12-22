@@ -88,7 +88,7 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 				(*table->discard) += temp;
 				temp = table->ta->trade(type);
 			}
-			cout << endl << type << "est placer dans la pile discard " << endl;
+			cout << endl << type << " est placer dans la pile discard " << endl <<endl;
 			j--;
 
 		}
@@ -265,8 +265,10 @@ int main() {
 					//Fin Étape 5
 
 					//Étape 6
-					player += table->deck->draw();
-					player += table->deck->draw();
+					if(!table->deck->empty())
+						player += table->deck->draw();
+					if (!table->deck->empty())
+						player += table->deck->draw();
 				}
 
 			}
@@ -276,7 +278,7 @@ int main() {
 			
 		}
 	cout << "Le gagnant est " << winner << "!\n";
-	remove("lastGameSaved.txt"); //game is over*/
+	remove("lastGameSaved.txt"); //game is over
 	cout << endl << endl;
 	system("pause");
 	return 0;
