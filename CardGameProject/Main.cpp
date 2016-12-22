@@ -243,7 +243,8 @@ int main() {
 							int choix = 0;
 							while (!choix) {
 								cout << "De quel carte voulez-vous vous debarasser?\nEntrez la position de la carte : ";
-								cin >> choix;
+								cin >> answer;
+								choix = answer - '0';
 								if (!(0 < choix && choix <= player.getHand()->size())) {
 									cout << "Position invalide, essayez de nouveau. ";
 									choix = 0;
