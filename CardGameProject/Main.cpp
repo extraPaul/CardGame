@@ -190,6 +190,7 @@ int main() {
 				else {
 					//Display table
 					cout << *table << "\n";
+					cout << "Votre main: " << *player.getHand() << endl;
 				}
 
 				//Étape 2
