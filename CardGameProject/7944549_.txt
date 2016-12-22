@@ -1,0 +1,1 @@
+gcc Main.cpp
