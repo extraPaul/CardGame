@@ -79,8 +79,6 @@ public:
 	};
 
 	bool removeChain(int i) {
-		cout << "n : " << n <<endl;
-		cout << "i : " << i <<endl;
 
 		if (0 <= i && i < n) {
 			if (i == 0) {

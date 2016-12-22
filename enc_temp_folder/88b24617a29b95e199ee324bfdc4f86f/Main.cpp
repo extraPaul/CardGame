@@ -200,6 +200,7 @@ int main() {
 								cout << "Vous avez vendu une chaine!\n";
 								cout << *table << "\n";
 								player.sellChain(i);
+								cout << "dans la boucle for comme si on vendait \n\n";
 							}
 						}
 

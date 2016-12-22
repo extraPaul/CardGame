@@ -94,9 +94,14 @@ template<class T>
 int Chain<T>::sell()
 {
 	T temp;
-	for (int cns = 4; cns < 0; cns--) {
-		if (this->getSize() == temp.getCardsPerCoin(cns))
+	for (int cns = 4; cns > 0; cns--) {
+		cout << "size of chain : "<< this->getSize() << endl;
+
+		if (this->getSize() == temp.getCardsPerCoin(cns)) {
+			cout << "in sell() : " << cns <<endl;
 			return cns;
+
+		}
 	}
 
 	return 0;
