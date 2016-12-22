@@ -1,7 +1,7 @@
 #include "Table.h"
 
 
-static bool BuyOrSellChain(Player player, bool optional) {
+static bool BuyOrSellChain(Player& player, bool optional) {
 	bool ret = false;
 	bool askExchange = true;
 	char answer;
@@ -26,13 +26,15 @@ static bool BuyOrSellChain(Player player, bool optional) {
 			cin >> answer;
 		}
 		else {
-			cout << "Vous devez vendre une chaine et la remplacer.\n";
+			cout << "Vous devez vendre une chaine et la remplacer.\n" << endl;
+			for(int i = 0 ; i< player.getNumChains(); i++)
+				cout << i+1 << " - " << player[i] <<endl;
 		}
 		if (answer == 'y' || !optional) {
 			ret = true;
 			int choix = 0;
 			while (!choix) {
-				cout << "Quel chaine voulez-vous echanger?\n(Entrez le numero de la chaine, en commencant a 1)";
+				cout << endl << "Quel chaine voulez-vous echanger?\nEntrez le numero de la chaine : ";
 				cin >> choix;
 				if (!(0 < choix && choix <= player.getNumChains())) {
 					cout << "Position invalide, essayez de nouveau. "; 
@@ -41,7 +43,6 @@ static bool BuyOrSellChain(Player player, bool optional) {
 			}
 			choix--;
 			player.sellChain(choix);
-			cout <<"apres sell chain dans buy or sell /n/n" <<endl;
 			//goes back in the loop and adds the card.
 		}
 	}
@@ -53,11 +54,15 @@ static bool BuyOrSellChain(Player player, bool optional) {
 
 static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 	char answer;
-	for (int j = 0; j < table->ta->cardTypes.size(); j++) {
+	int j = 0;
+	//for (int j = 0; j < table->ta->cards->size(); j++) {
+
+	while(j<  table->ta->cards->size()){
 		string type = table->ta->getCardType(j);
+
 		cout << *table << "\n";
 
-		//TODO Une carte à la foix ou tous enssemble?
+		//TODO Une carte à la foix ou tous ensemble?
 		cout << "Voulez-vous rammasser les cartes de type " << type << " ? (y/n) ";
 		cin >> answer;
 		if (answer == 'y') {
@@ -73,17 +78,21 @@ static void pickUpFromTradingArea(Table* table, Player& player, bool discard) {
 						temp = nullptr;
 				}
 			}
+			j--;
 		}	//else add them to discard.
 		else if(discard) {
 			Card* temp = table->ta->trade(type);
 			while (temp) {
 				(*table->discard) += temp;
+				cout << "card bellow is discarded \n";
 				temp = table->ta->trade(type);
 			}
+			j--;
 		}
-		if (!(j > table->ta->cardTypes.size()))
+		j++;
+	/*	if (!(j > table->ta->cardTypes.size()))
 			if(type.compare(table->ta->getCardType(j)) != 0)
-				j--;
+				j--;*/
 	}
 }
 
@@ -97,7 +106,6 @@ static void save(Table&table) {
 		(*table.discard).print(outputFile);
 		outputFile << "\n" << *table.ta;
 		outputFile << "\n" << *table.deck << endl;
-		outputFile << "LE TOUR A QUI";
 		outputFile.close();
 	}
 }
@@ -154,7 +162,6 @@ int main() {
 
 
 
-	//deck is now a pointer in TABLE CAREFULL
 	string winner;
 	while (!table->win(winner)) {
 		cout << "Voulez-vous mettre la partie en pause? (y/n) ";
@@ -168,7 +175,7 @@ int main() {
 		}
 		else {
 			for (Player& player : table->players) {
-				cout << "**********************\nC'est le tour a " << player.getName();
+				cout << endl <<endl << "**********************\nC'est le tour a " << player.getName();
 				cout << "\n**********************\n" << endl;
 				
 				//Draw a card
@@ -196,20 +203,25 @@ int main() {
 								cout << "dans la boucle for comme si on vendait \n\n";
 							}
 						}
-						if (0 < player.getHand()->size()) {
-							cout << player << endl;
-							cout << "Votre main: " << *player.getHand() << endl;
-							cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
-							cin >> answer;
-							if (answer == 'n')
-								keepPlaying = false;
-						}
+
 					}
 					else {
 						BuyOrSellChain(player, false); 
-						cout << "dans le else\n\n";
+						player.addToChain(cardPlayed); //maintenant on peut l'ajouter
 
 					}
+					if(player.getHand()->size() ==0)
+						keepPlaying = false;
+
+					if (0 < player.getHand()->size()) {
+						cout << player << endl;
+						cout << "Votre main: " << *player.getHand() << endl;
+						cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
+						cin >> answer;
+						if (answer == 'n')
+							keepPlaying = false;
+					}
+
 				} //Fin Étape 2 et 3
 
 					//Étape 4

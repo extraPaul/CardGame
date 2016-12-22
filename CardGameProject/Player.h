@@ -56,10 +56,12 @@ public:
 		if (n == 2)
 			chain3 = chain;
 		n++;
+
 		return true;
 	};
 
 	int size() { 
+		//cout << "n dans size : " << n << endl;
 		return n; 
 	};
 
@@ -77,9 +79,13 @@ public:
 	};
 
 	bool removeChain(int i) {
+		cout << "n : " << n <<endl;
+		cout << "i : " << i <<endl;
+
 		if (0 <= i && i < n) {
 			if (i == 0) {
 				chain1 = chain2;
+				chain2 = chain3;
 			}
 			if (i <= 1) {
 				chain2 = chain3;

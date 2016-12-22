@@ -12,6 +12,7 @@ Hand& Hand ::operator+=(Card*cardToAdd) {
 }//a joute une carte derrière la dernière carte de la main.
 
 Card* Hand :: play() {
+
 	Card* temp = (*this).back();
 	(*this).pop_back();
 	return temp;
