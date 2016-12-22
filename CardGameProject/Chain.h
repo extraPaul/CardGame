@@ -95,7 +95,7 @@ int Chain<T>::sell()
 {
 	T temp;
 	for (int cns = 4; cns > 0; cns--) {
-		if (this->getSize() == temp.getCardsPerCoin(cns)) {
+		if (this->getSize() >= temp.getCardsPerCoin(cns)) {
 			return cns;
 
 		}
@@ -122,25 +122,4 @@ inline string Chain<T>::getType()
 	return type;
 }
 
-/*
-Text File Format:
-Line 1: CardType Name \t X X X			 (amount of time)
-*/
-
-
-/*template<class T>
-ostream & operator<<(ostream & sortie, Chain<T> c)
-{
-	sortie << c[0]->getName() << '\t';
-	for (vector<T*>::iterator it = c.begin(); it != c.end(); it++) {
-		sortie << " ";
-		(*it)->print(sortie);
-	}
-	sortie << "\n";
-	return sortie;
-}
-
-
-
-}*/
 

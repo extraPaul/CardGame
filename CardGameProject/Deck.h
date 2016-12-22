@@ -15,7 +15,6 @@ public:
 	Card* draw();
 	friend ostream & operator << (ostream &, Deck);
 };
-#endif
 
 class DeckEmpty : public exception
 {
@@ -24,3 +23,5 @@ class DeckEmpty : public exception
 		return "The deck is empty.";
 	}
 };
+
+#endif
