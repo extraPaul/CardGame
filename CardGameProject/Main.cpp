@@ -166,69 +166,70 @@ int main() {
 
 	string winner;
 	while (!table->win(winner)) {
-		cout << "Voulez-vous mettre la partie en pause? (y/n) ";
-		cin >> answer;
-		if (answer == 'y')
-			pause = true;
-		if (pause) {
-			//Save game to file and exit
-			save(*table);
-			return 0;
-		}
-		else {
-			for (Player& player : table->players) {
-				cout << endl <<endl << "**********************\nC'est le tour a " << player.getName();
-				cout << "\n**********************\n" << endl;
-				
-				//Draw a card
-				player += table->deck->draw();
+		try {
+			cout << "Voulez-vous mettre la partie en pause? (y/n) ";
+			cin >> answer;
+			if (answer == 'y')
+				pause = true;
+			if (pause) {
+				//Save game to file and exit
+				save(*table);
+				return 0;
+			}
+			else {
+				for (Player& player : table->players) {
+					cout << endl << endl << "**********************\nC'est le tour a " << player.getName();
+					cout << "\n**********************\n" << endl;
 
-				if (!table->ta->empty()) {
-					pickUpFromTradingArea(table, player, true);
-					cout << *table << "\n";
-				}//done with Trade Area (Étape 1)
-				else {
-					//Display table
-					cout << *table << "\n";
-					cout << "Votre main: " << *player.getHand() << endl;
-				}
+					//Draw a card
+					player += table->deck->draw();
 
-				//Étape 2
-				cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
-				bool keepPlaying = true;
-				while (keepPlaying) {
-					Card* cardPlayed = player.getHand()->play();
-					if (player.addToChain(cardPlayed)) {
-						for (int i = 0; i < player.getNumChains(); i++) {
-							if (player[i].sell() > 0) {
-								cout << "Vous avez vendu une chaine!\n";
-								player.sellChain(i);
-								cout << *table << "\n";
+					if (!table->ta->empty()) {
+						pickUpFromTradingArea(table, player, true);
+						cout << *table << "\n";
+					}//done with Trade Area (Étape 1)
+					else {
+						//Display table
+						cout << *table << "\n";
+						cout << "Votre main: " << *player.getHand() << endl;
+					}
 
+					//Étape 2
+					cout << "Vous jouez la premiere carte de votre main: " << player.getHand()->top() << "\n";
+					bool keepPlaying = true;
+					while (keepPlaying) {
+						Card* cardPlayed = player.getHand()->play();
+						if (player.addToChain(cardPlayed)) {
+							for (int i = 0; i < player.getNumChains(); i++) {
+								if (player[i].sell() > 0) {
+									cout << "Vous avez vendu une chaine!\n";
+									player.sellChain(i);
+									cout << *table << "\n";
+
+								}
 							}
+
+						}
+						else {
+							BuyOrSellChain(player, false);
+							player.addToChain(cardPlayed); //maintenant on peut l'ajouter
+
+						}
+						if (player.getHand()->size() == 0)
+							keepPlaying = false;
+
+						if (0 < player.getHand()->size()) {
+							cout << endl << player << endl;
+							cout << "Votre main: " << *player.getHand() << endl;
+							cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
+							cin >> answer;
+							if (answer == 'n')
+								keepPlaying = false;
 						}
 
-					}
-					else {
-						BuyOrSellChain(player, false); 
-						player.addToChain(cardPlayed); //maintenant on peut l'ajouter
+					} //Fin Étape 2 et 3
 
-					}
-					if(player.getHand()->size() ==0)
-						keepPlaying = false;
-
-					if (0 < player.getHand()->size()) {
-						cout << endl<< player << endl;
-						cout << "Votre main: " << *player.getHand() << endl;
-						cout << "Voulez-vous jouer votre prochaine carte? " << player.getHand()->top() << " (y/n) ";
-						cin >> answer;
-						if (answer == 'n')
-							keepPlaying = false;
-					}
-
-				} //Fin Étape 2 et 3
-
-					//Étape 4
+					  //Étape 4
 					if (0 < player.getHand()->size()) {
 						cout << player << endl;
 						cout << "Votre main: " << *player.getHand() << "\n";
@@ -236,11 +237,11 @@ int main() {
 
 						cin >> answer;
 						if (answer == 'y') {
-							cout  << endl << *player.getHand() << "\n";
+							cout << endl << *player.getHand() << "\n";
 							for (int i = 1; i <= player.getHand()->size(); i++) {
 								cout << i;
 							}
-							cout << endl <<endl;
+							cout << endl << endl;
 							int choix = 0;
 							while (!choix) {
 								cout << "De quel carte voulez-vous vous debarasser?\nEntrez la position de la carte : ";
@@ -250,11 +251,11 @@ int main() {
 									choix = 0;
 								}
 							}
-							(*table->discard) += (*player.getHand())[choix];  
+							(*table->discard) += (*player.getHand())[choix];
 						}
 					} //Fin Étape 4
 
-					//Étape 5
+					  //Étape 5
 					for (int i = 0; i < 3; i++) {
 						(*table->ta) += table->deck->draw();    //Mettre 3 nouvelles cartes dans le TA
 					}
@@ -270,11 +271,18 @@ int main() {
 				}
 
 			}
-
-
-
-			
 		}
+		catch (DeckEmpty d) {
+			if (table->win(winner)) {
+				cout << "Le gagnant est " << winner << "!\n";
+				remove("lastGameSaved.txt"); //game is over*/
+				cout << endl << endl;
+				system("pause");
+				return 0;
+			}
+		}
+		
+	}
 	cout << "Le gagnant est " << winner << "!\n";
 	remove("lastGameSaved.txt"); //game is over*/
 	cout << endl << endl;

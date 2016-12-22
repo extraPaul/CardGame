@@ -16,3 +16,11 @@ public:
 	friend ostream & operator << (ostream &, Deck);
 };
 #endif
+
+class DeckEmpty : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "The deck is empty.";
+	}
+};
